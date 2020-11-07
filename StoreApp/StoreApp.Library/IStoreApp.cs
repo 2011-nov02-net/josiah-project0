@@ -4,13 +4,13 @@ using System.Text;
 
 namespace StoreApp.Library
 {
-    interface IStoreApp
+    public interface IStoreApp
     {
-        List<Order> SearchByCustomer(Customer customer);
-        List<Order> SearchByLocation(Location location);
-        bool addCustomer(Customer customer);
-        bool addNewOrder(Order order);
-        void writeData();
-        void readData();
+        public List<Order> SearchByCustomer(Customer customer);
+        public List<Order> SearchByLocation(Location location);
+        public void AddCustomer(Customer customer);
+        public void AddOrder(Order order);
+        public void WriteData();
+        public void ReadData();
     }
 }

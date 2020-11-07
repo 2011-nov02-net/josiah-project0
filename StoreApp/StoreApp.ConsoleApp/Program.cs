@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StoreApp.Library;
+using System;
 
 namespace StoreApp.ConsoleApp
 {
@@ -6,7 +7,9 @@ namespace StoreApp.ConsoleApp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            IStoreApp app = new StoreApplication();
+
+            
         }
     }
 }

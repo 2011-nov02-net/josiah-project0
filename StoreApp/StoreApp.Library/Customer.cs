@@ -8,7 +8,10 @@ namespace StoreApp.Library
     {
         public string FirstName { get; }
         public string LastName { get; }
-
-
+        
+        public Customer(string f, string l)
+        {
+            FirstName = f; LastName = l;
+        }
     }
 }

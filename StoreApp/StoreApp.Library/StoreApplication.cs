@@ -7,34 +7,52 @@ namespace StoreApp.Library
     {
         private List<Customer> _customers = new List<Customer>();
         private List<Order> _orders = new List<Order>();
-        private List<Product> _products = new List<Product>();
+        private List<Location> _locations = new List<Location>();
 
-        bool IStoreApp.addCustomer(Customer customer)
+        void IStoreApp.AddCustomer(Customer customer)
         {
-            throw new NotImplementedException();
+            if (!_customers.Contains(customer))
+            {
+                _customers.Add(customer);
+            }
         }
 
-        bool IStoreApp.addNewOrder(Order order)
+        void IStoreApp.AddOrder(Order order)
         {
-            throw new NotImplementedException();
-        }
-
-        void IStoreApp.readData()
-        {
-            throw new NotImplementedException();
+            _orders.Add(order);
         }
 
         List<Order> IStoreApp.SearchByCustomer(Customer customer)
         {
-            throw new NotImplementedException();
+            List<Order> result = new List<Order>();
+            foreach (var x in _orders)
+            {
+                if (x.Customer == customer)
+                {
+                    result.Add(x);
+                }
+            }
+            return result;
         }
 
         List<Order> IStoreApp.SearchByLocation(Location location)
         {
+            List<Order> result = new List<Order>();
+            foreach (var x in _orders)
+            {
+                if (x.Location == location)
+                {
+                    result.Add(x);
+                }
+            }
+            return result;
+        }
+        void IStoreApp.ReadData()
+        {
             throw new NotImplementedException();
         }
 
-        void IStoreApp.writeData()
+        void IStoreApp.WriteData()
         {
             throw new NotImplementedException();
         }

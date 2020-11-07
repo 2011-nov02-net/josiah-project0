@@ -11,7 +11,6 @@ namespace StoreApp.Library
         {
             get { return _items; }
         }
-
         public Location Location { get; }
         public Customer Customer { get; }
         public DateTime Time { get; }
