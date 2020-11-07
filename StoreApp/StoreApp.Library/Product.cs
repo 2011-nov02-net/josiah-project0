@@ -5,7 +5,7 @@ using System.Text;
 
 namespace StoreApp.Library
 {
-    class Product
+    public class Product
     {
         public string Name { get; }
         public int Amount { get; private set; }
@@ -20,6 +20,17 @@ namespace StoreApp.Library
             Name = name;
             Amount = amount;
         }
-        public Operators+
+        public void removeProduct(Product p)
+        {
+            if (Amount-p.Amount < 0)
+            {
+                throw new ArgumentException("Product amount can't be less than 0");
+            }
+            if (p.Name != this.Name)
+            {
+                throw new ArgumentException("Can't change amount of different products");
+            }
+            Amount -= p.Amount;
+        }
     }
 }

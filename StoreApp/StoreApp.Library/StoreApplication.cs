@@ -8,8 +8,6 @@ namespace StoreApp.Library
         private List<Customer> _customers = new List<Customer>();
         private List<Order> _orders = new List<Order>();
         private List<Product> _products = new List<Product>();
-        private List
-
 
     }
 }

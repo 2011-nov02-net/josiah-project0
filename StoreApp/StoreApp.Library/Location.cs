@@ -4,7 +4,7 @@ using System.Text;
 
 namespace StoreApp.Library
 {
-    class Location : ILocation
+    public class Location : ILocation
     {
 
 
