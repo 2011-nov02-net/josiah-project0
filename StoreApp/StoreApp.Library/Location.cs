@@ -4,14 +4,20 @@ using System.Text;
 
 namespace StoreApp.Library
 {
-    public class Location : ILocation
+    public class Location
     {
+        public string Address { get; }
 
-        bool ILocation.checkAvail(Product p, int count)
+        private Dictionary<Product, int> _inventory = new Dictionary<Product, int>();
+        public Dictionary<Product, int> Inventory
         {
-            throw new NotImplementedException();
+            get { return Inventory; }
         }
 
+        public bool SellItem(Dictionary<Product, int> items)
+        {
+
+        }
 
     }
 }
