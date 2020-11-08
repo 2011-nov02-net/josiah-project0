@@ -1,5 +1,6 @@
 ﻿using StoreApp.Library;
 using System;
+using System.Collections.Generic;
 
 namespace StoreApp.ConsoleApp
 {
@@ -17,8 +18,36 @@ namespace StoreApp.ConsoleApp
             app.AddCustomer(new Customer("Annie", "Edison"));
             app.AddCustomer(new Customer("Pierce", "Hawthorne"));
 
+            app.AddOrder(new Order(
+                new Location("West Street"),
+                new Customer("Jerry", "Smith"),
+                new Dictionary<Product, int> { { new Product("lollipop", 1.00), 5 } }
+                ));
+            app.AddOrder(new Order(
+                new Location("West Street"),
+                new Customer("Beth", "Smith"),
+                new Dictionary<Product, int> { { new Product("gumdrop", 1.00), 1 } }
+                ));
+            app.AddOrder(new Order(
+                new Location("Doppler Emporium"),
+                new Customer("Jerry", "Smith"),
+                new Dictionary<Product, int> { { new Product("tootsie rolls", 1.00), 30 },
+                                               { new Product("cinnamon roll", 5.00), 5 },
+                                               { new Product("Cupcake", 3.00), 1 }
+                }
+                ));
+            app.AddOrder(new Order(
+                new Location("Doppler"),
+                new Customer("Rick", "Sanchez"),
+                new Dictionary<Product, int> { { new Product("pop rocks", 2.00), 5 } }
+                ));
 
-            
+            var test = app.SearchByCustomer(new Customer("Jerry", "Smith"));
+
+            foreach (var x in test)
+            {
+                x.displayOrder();
+            }
         }
     }
 }

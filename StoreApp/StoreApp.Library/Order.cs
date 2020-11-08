@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace StoreApp.Library
@@ -18,6 +19,22 @@ namespace StoreApp.Library
         public Order(Location l, Customer c, Dictionary<Product, int> d)
         {
             Location = l; Customer = c; Time = DateTime.Now; _items = d;
+            foreach (var x in d)
+            {
+                if (x.Value < 0 || x.Value > 50)
+                {
+                    throw new ArgumentException($"Item quantity ({x.Key}:{x.Value}) out of range");
+                }
+            }
+        }
+        public void displayOrder()
+        {
+
+            var items = Items.Select(x => string.Format("{0}{1}{2, -5}", x.Key.Name, " ", x.Value));
+
+            Console.WriteLine($"{Customer.FirstName} {Customer.LastName,-10} " +
+                $"{Location.Name,-20} {Time,-30} " +
+                $"{string.Join("  |  ", items)}");
         }
 
     }

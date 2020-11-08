@@ -13,5 +13,11 @@ namespace StoreApp.Library
         {
             FirstName = f; LastName = l;
         }
+
+        public bool Equals(Customer c)
+        {
+            if (FirstName == c.FirstName && LastName == c.LastName) return true;
+            return false;
+        }
     }
 }

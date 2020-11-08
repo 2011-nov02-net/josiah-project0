@@ -27,7 +27,7 @@ namespace StoreApp.Library
             List<Order> result = new List<Order>();
             foreach (var x in _orders)
             {
-                if (x.Customer == customer)
+                if (x.Customer.Equals(customer))
                 {
                     result.Add(x);
                 }
