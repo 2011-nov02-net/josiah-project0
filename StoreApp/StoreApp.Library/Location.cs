@@ -24,7 +24,19 @@ namespace StoreApp.Library
             if (l.Name == Name) return true;
             return false;
         }
-
+        public override bool Equals(object obj)
+        {
+            return this.Equals(obj as Location);
+        }
+        public static bool operator ==(Location c1, Location c2)
+        {
+            if (c1.Equals(c2)) return true;
+            return false;
+        }
+        public static bool operator !=(Location c1, Location c2)
+        {
+            return (!(c1 == c2));
+        }
         public void AddItems(Product p, int count)
         {
             if (_inventory.ContainsKey(p))

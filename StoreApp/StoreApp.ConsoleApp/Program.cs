@@ -56,7 +56,7 @@ namespace StoreApp.ConsoleApp
             }
 
 
-            // var test = app.SearchOrdersByCustomer(new Customer("Jerry", "Smith"));
+            //var test = app.SearchOrdersByCustomer(new Customer("Jerry", "Smith"));
 
             var test = app.SearchOrdersByLocation(new Location("West Street"));
 

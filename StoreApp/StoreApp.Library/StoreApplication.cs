@@ -27,7 +27,7 @@ namespace StoreApp.Library
             List<Order> result = new List<Order>();
             foreach (var x in _orders)
             {
-                if (x.Customer.Equals(customer))
+                if (x.Customer == customer)
                 {
                     result.Add(x);
                 }
@@ -40,7 +40,7 @@ namespace StoreApp.Library
             List<Order> result = new List<Order>();
             foreach (var x in _orders)
             {
-                if (x.Location.Equals(location))
+                if (x.Location == location)
                 {
                     result.Add(x);
                 }
