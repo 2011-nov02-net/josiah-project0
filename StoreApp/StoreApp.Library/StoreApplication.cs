@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace StoreApp.Library
 {
@@ -19,7 +20,14 @@ namespace StoreApp.Library
 
         void IStoreApp.AddOrder(Order order)
         {
+            if (!_customers.Contains(order.Customer))
+            {
+                throw new ArgumentException("Can not place an order for a customer that does not exist");
+            }
+            var l = _locations.Select(x => x.Name == order.Location.Name);
+
             _orders.Add(order);
+            
         }
 
         List<Order> IStoreApp.SearchOrdersByCustomer(Customer customer)
