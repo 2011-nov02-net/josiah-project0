@@ -31,10 +31,12 @@ namespace StoreApp.Library
         {
 
             var items = Items.Select(x => string.Format("{0}{1}{2, -5}", x.Key.Name, " ", x.Value));
+            var price = Items.Select(x => x.Key.Price * x.Value).Sum();
 
-            Console.WriteLine($"{Customer.FirstName} {Customer.LastName,-10} " +
+            Console.WriteLine($"{Customer.FirstName, -5} {Customer.LastName,-10} " +
                 $"{Location.Name,-20} {Time,-30} " +
-                $"{string.Join("  |  ", items)}");
+                $"{string.Join("  |  ", items)}" +
+                $"{price.ToString("c"), -10}");
         }
 
     }

@@ -42,7 +42,24 @@ namespace StoreApp.ConsoleApp
                 new Dictionary<Product, int> { { new Product("pop rocks", 2.00), 5 } }
                 ));
 
-            var test = app.SearchByCustomer(new Customer("Jerry", "Smith"));
+            try
+            {
+                app.AddOrder(new Order(
+                    new Location("West Street"),
+                    new Customer("Jerry", "Smith"),
+                    new Dictionary<Product, int> { { new Product("lollipop", 1.00), 50 } }
+                    ));
+            }
+            catch (ArgumentException)
+            {
+
+            }
+
+
+            // var test = app.SearchOrdersByCustomer(new Customer("Jerry", "Smith"));
+
+            var test = app.SearchOrdersByLocation(new Location("West Street"));
+
 
             foreach (var x in test)
             {

@@ -22,7 +22,7 @@ namespace StoreApp.Library
             _orders.Add(order);
         }
 
-        List<Order> IStoreApp.SearchByCustomer(Customer customer)
+        List<Order> IStoreApp.SearchOrdersByCustomer(Customer customer)
         {
             List<Order> result = new List<Order>();
             foreach (var x in _orders)
@@ -35,12 +35,12 @@ namespace StoreApp.Library
             return result;
         }
 
-        List<Order> IStoreApp.SearchByLocation(Location location)
+        List<Order> IStoreApp.SearchOrdersByLocation(Location location)
         {
             List<Order> result = new List<Order>();
             foreach (var x in _orders)
             {
-                if (x.Location == location)
+                if (x.Location.Equals(location))
                 {
                     result.Add(x);
                 }
