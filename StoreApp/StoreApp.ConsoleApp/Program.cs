@@ -10,9 +10,11 @@ namespace StoreApp.ConsoleApp
     {
         static void Main(string[] args)
         {
-            string filepath = @"../../../../Data/storeAppData.json";
-            IStoreApp app = new StoreApplication();
+            string writepath = @"../../../../Data/storeAppData.json";
+            string readpath = @"../../../../Data/readFromData.json";
+            IStoreApp app = StoreApplication.ReadData(readpath);
 
+            /*
             app.AddCustomer(new Customer("Jeff", "Winger"));
             app.AddCustomer(new Customer("Britta", "Perry"));
             app.AddCustomer(new Customer("Abed", "Nadir"));
@@ -60,8 +62,6 @@ namespace StoreApp.ConsoleApp
             {
                 x.DisplayOrderToConsole();
             }
-
-            app.WriteData(filepath);
 
             //string json = JsonSerializer.Serialize(app.SearchOrdersByCustomer(new Customer("Jerry", "Smith")));
             //File.WriteAllText(filepath, json);

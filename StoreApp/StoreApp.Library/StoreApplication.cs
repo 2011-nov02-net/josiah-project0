@@ -12,13 +12,13 @@ namespace StoreApp.Library
     public class StoreApplication : IStoreApp
     {
         private List<Customer> _customers = new List<Customer>();
-        public List<Customer> Customers { get { return _customers; } }
+        public List<Customer> Customers { get { return _customers; } private set { } }
 
         private List<Order> _orders = new List<Order>();
-        public List<Order> Orders { get { return _orders; } }
+        public List<Order> Orders { get { return _orders; } private set { } }
 
         private List<Location> _locations = new List<Location>();
-        public List<Location> Locations { get { return _locations; } }
+        public List<Location> Locations { get { return _locations; } private set { } }
 
         void IStoreApp.AddCustomer(Customer customer)
         {
@@ -91,9 +91,12 @@ namespace StoreApp.Library
             var addition = _locations.Find(x => x == location);
             addition.AddItems(product);
         }
-        void IStoreApp.ReadData()
+
+        public static StoreApplication ReadData(string filepath)
         {
-            throw new NotImplementedException();
+            string json = File.ReadAllText(filepath);
+            StoreApplication result = JsonSerializer.Deserialize<StoreApplication>(json);
+            return result;
         }
 
         void IStoreApp.WriteData(string Path)
