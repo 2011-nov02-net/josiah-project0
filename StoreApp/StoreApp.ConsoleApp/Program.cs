@@ -12,9 +12,9 @@ namespace StoreApp.ConsoleApp
         {
             string writepath = @"../../../../Data/storeAppData.json";
             string readpath = @"../../../../Data/readFromData.json";
-            IStoreApp app = StoreApplication.ReadData(readpath);
+            IStoreApp app = new StoreApplication();
 
-            /*
+            
             app.AddCustomer(new Customer("Jeff", "Winger"));
             app.AddCustomer(new Customer("Britta", "Perry"));
             app.AddCustomer(new Customer("Abed", "Nadir"));
@@ -28,11 +28,12 @@ namespace StoreApp.ConsoleApp
             app.AddLocation(new Location("Doppler Emporium"));
 
             app.AddInventoryToLocation(new Location("West Street"),
-                new List<Product> { new Product("lollipop", 3.00, 30),
-                                    new Product("cupcake", 5.00, 20) }
-                );
+                new List<Product> { new Product("lollipop", 1.00, 300),
+                                    new Product("cupcake", 3.00, 20),
+                                    new Product("muffin", 5.00, 30)
+                });
 
-            /*
+            
             try
             {
                 app.AddOrder(new Order(
@@ -51,7 +52,7 @@ namespace StoreApp.ConsoleApp
             {
                 Console.WriteLine(e.Message);
             }
-            */
+            
 
             var test = app.SearchOrdersByCustomer(new Customer("Jerry", "Smith"));
 
@@ -60,7 +61,7 @@ namespace StoreApp.ConsoleApp
 
             foreach (var x in test)
             {
-                x.DisplayOrderToConsole();
+                Console.WriteLine(x.DisplayOrder());
             }
 
             //string json = JsonSerializer.Serialize(app.SearchOrdersByCustomer(new Customer("Jerry", "Smith")));

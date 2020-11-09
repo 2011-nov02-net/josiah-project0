@@ -55,8 +55,11 @@ namespace StoreApp.Library
                 {
                     throw new ArgumentException("Can't place item for order that does not exist");
                 }
+                if (l.Inventory.Find(y => y == x).Amount < x.Amount)
+                {
+                    throw new ArgumentException("Can't order more of an item than exists in inventory");
+                }
             }
-
             _orders.Add(order);
             
         }

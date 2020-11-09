@@ -27,12 +27,12 @@ namespace StoreApp.Library
                 }
             }
         }
-        public void DisplayOrderToConsole()
+        public string DisplayOrder()
         {
             var items = Items.Select(x => string.Format("{0}{1}{2, -5}", x.Name, " ", x.Amount));
-            var price = Items.Select(x => x.Price).Sum();
+            var price = Items.Select(x => x.Price * x.Amount).Sum();
 
-            Console.WriteLine($"{Customer.FirstName, -5} {Customer.LastName,-10} " +
+            return ($"{Customer.FirstName, -5} {Customer.LastName,-10} " +
                 $"{Location.Name,-20} {Time,-30} " +
                 $"{string.Join("  |  ", items)}" +
                 $"{price.ToString("c"), -10}");
