@@ -77,5 +77,10 @@ namespace StoreApp.Library
                 }
             }
         }
+        public bool containsProduct(Product p)
+        {
+            if (_inventory.Exists(x => x == p)) return true;
+            return false;
+        }
     }
 }

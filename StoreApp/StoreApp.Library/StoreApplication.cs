@@ -47,7 +47,15 @@ namespace StoreApp.Library
                 throw new ArgumentException("Can not place an order at a location that does not exist");
             }
 
-            var l = _locations.Select(x => x.Name == order.Location.Name);
+            var l = _locations.Find(x => x.Name == order.Location.Name);
+
+            foreach (var x in order.Items)
+            {
+                if (!l.Inventory.Contains(x))
+                {
+                    throw new ArgumentException("Can't place item for order that does not exist");
+                }
+            }
 
             _orders.Add(order);
             
