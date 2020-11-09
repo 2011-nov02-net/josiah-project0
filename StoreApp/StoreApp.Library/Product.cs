@@ -11,7 +11,7 @@ namespace StoreApp.Library
 
         private double _price;
         public double Price {
-            get { return _price * _discount * Amount; }
+            get { return _price * _discount; }
             private set { _price = value; }
         }
 
@@ -33,7 +33,7 @@ namespace StoreApp.Library
         }
         public override bool Equals(object obj)
         {
-            return this.Equals(obj as Product);
+            return (((Product)obj).Name == this.Name);
         }
         public static bool operator ==(Product c1, Product c2)
         {

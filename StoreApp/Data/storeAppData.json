@@ -1,1 +1,58 @@
-{}
+{
+  "Customers": [
+    {
+      "FirstName": "Jeff",
+      "LastName": "Winger"
+    },
+    {
+      "FirstName": "Britta",
+      "LastName": "Perry"
+    },
+    {
+      "FirstName": "Abed",
+      "LastName": "Nadir"
+    },
+    {
+      "FirstName": "Troy",
+      "LastName": "Barnes"
+    },
+    {
+      "FirstName": "Shirley",
+      "LastName": "Bennett"
+    },
+    {
+      "FirstName": "Annie",
+      "LastName": "Edison"
+    },
+    {
+      "FirstName": "Pierce",
+      "LastName": "Hawthorne"
+    },
+    {
+      "FirstName": "Jerry",
+      "LastName": "Smith"
+    }
+  ],
+  "Orders": [],
+  "Locations": [
+    {
+      "Name": "West Street",
+      "Inventory": [
+        {
+          "Name": "lollipop",
+          "Price": 3,
+          "Amount": 30
+        },
+        {
+          "Name": "cupcake",
+          "Price": 5,
+          "Amount": 20
+        }
+      ]
+    },
+    {
+      "Name": "Doppler Emporium",
+      "Inventory": []
+    }
+  ]
+}

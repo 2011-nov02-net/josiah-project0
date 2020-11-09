@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Text.Json;
+using System.Xml;
 
 namespace StoreApp.Library
 {
@@ -77,6 +78,11 @@ namespace StoreApp.Library
             }
             return result;
         }
+        void IStoreApp.AddInventoryToLocation(Location location, List<Product> product)
+        {
+            var addition = _locations.Find(x => x == location);
+            addition.AddItems(product);
+        }
         void IStoreApp.ReadData()
         {
             throw new NotImplementedException();
@@ -84,8 +90,9 @@ namespace StoreApp.Library
 
         void IStoreApp.WriteData(string Path)
         {
-            string json = JsonSerializer.Serialize(this, GetType());
             var options = new JsonSerializerOptions();
+            options.WriteIndented = true;
+            string json = JsonSerializer.Serialize(this, GetType(), options);
 
             File.WriteAllText(Path, json);
         }

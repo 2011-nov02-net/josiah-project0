@@ -12,11 +12,10 @@ namespace StoreApp.Library
         {
             Name = name;
         }
-
-        private Dictionary<Product, int> _inventory = new Dictionary<Product, int>();
-        public Dictionary<Product, int> Inventory
+        private List<Product> _inventory = new List<Product>();
+        public List<Product> Inventory
         {
-            get { return Inventory; }
+            get { return _inventory; }
         }
 
         public bool Equals(Location l)
@@ -37,30 +36,46 @@ namespace StoreApp.Library
         {
             return (!(c1 == c2));
         }
-        public void AddItems(Product p, int count)
+        public void AddItems(List<Product> p)
         {
-            if (_inventory.ContainsKey(p))
+            foreach (var x in p)
             {
-                _inventory[p] += count;
+                if (!_inventory.Contains(x))
+                {
+                    _inventory.Add(x);
+                }
+                else
+                {
+                    var adding = _inventory.Find(y => y == x);
+                    adding.Amount += x.Amount;
+                }
+            }
+        }
+
+        public void SellItems(Product p)
+        {
+            if (!_inventory.Contains(p))
+            {
+                throw new ArgumentException("Can't sell item that does not exist in inventory");
             }
             else
             {
-                _inventory.Add(p, count);
-            }
-        }
-
-        public bool SellItems(Product p, int count)
-        {
-            if (_inventory.ContainsKey(p))
-            {
-                if (_inventory[p] >= count)
+                foreach (var x in _inventory)
                 {
-                    _inventory[p] -= count;
-                    return true;
+                    if (x==p)
+                    {
+                        if (x.Amount < p.Amount)
+                        {
+                            throw new ArgumentException("Can't sell more of an item than exists in inventory");
+                        }
+                        else
+                        {
+                            x.Amount -= p.Amount;
+                            break;
+                        }
+                    }
                 }
             }
-            return false;
         }
-
     }
 }

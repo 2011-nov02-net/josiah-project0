@@ -25,6 +25,12 @@ namespace StoreApp.ConsoleApp
             app.AddLocation(new Location("West Street"));
             app.AddLocation(new Location("Doppler Emporium"));
 
+            app.AddInventoryToLocation(new Location("West Street"),
+                new List<Product> { new Product("lollipop", 3.00, 30),
+                                    new Product("cupcake", 5.00, 20) }
+                );
+
+            /*
             try
             {
                 app.AddOrder(new Order(
@@ -43,7 +49,7 @@ namespace StoreApp.ConsoleApp
             {
                 Console.WriteLine(e.Message);
             }
-
+            */
 
             var test = app.SearchOrdersByCustomer(new Customer("Jerry", "Smith"));
 
@@ -55,7 +61,7 @@ namespace StoreApp.ConsoleApp
                 x.DisplayOrderToConsole();
             }
 
-            //app.WriteData(filepath);
+            app.WriteData(filepath);
 
             //string json = JsonSerializer.Serialize(app.SearchOrdersByCustomer(new Customer("Jerry", "Smith")));
             //File.WriteAllText(filepath, json);
