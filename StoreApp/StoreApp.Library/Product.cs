@@ -1,12 +1,15 @@
 ﻿using Microsoft.VisualBasic.CompilerServices;
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace StoreApp.Library
 {
+    [DataContract()]
     public class Product
     {
+        [DataMember]
         public string Name { get; }
 
         private double _price;
@@ -31,6 +34,7 @@ namespace StoreApp.Library
             Price = price;
             Amount = amount;
         }
+        private Product() { }
         public override bool Equals(object obj)
         {
             return (((Product)obj).Name == this.Name);

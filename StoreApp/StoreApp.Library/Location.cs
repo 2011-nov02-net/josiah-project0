@@ -1,17 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace StoreApp.Library
 {
+    [DataContract(Name = "Location")]
     public class Location
     {
+        [DataMember]
         public string Name { get; }
 
         public Location(string name)
         {
             Name = name;
         }
+        private Location() { }
         private List<Product> _inventory = new List<Product>();
         public List<Product> Inventory
         {

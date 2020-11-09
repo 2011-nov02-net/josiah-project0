@@ -5,21 +5,25 @@ using System.IO;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Runtime.CompilerServices;
+using System.Runtime.Serialization;
 using System.Text.Json;
 using System.Xml;
+using System.Xml.Serialization;
 
 namespace StoreApp.Library
 {
+    [DataContract(Name = "Store Application")]
     public class StoreApplication : IStoreApp
     {
+        [DataMember]
         private List<Customer> _customers = new List<Customer>();
-        public List<Customer> Customers { get { return _customers; } private set { } }
-
+        public List<Customer> Customers { get { return _customers; } private set { _customers = value; } }
+        [DataMember]
         private List<Order> _orders = new List<Order>();
-        public List<Order> Orders { get { return _orders; } private set { } }
-
+        public List<Order> Orders { get { return _orders; } private set { _orders = value; } }
+        [DataMember]
         private List<Location> _locations = new List<Location>();
-        public List<Location> Locations { get { return _locations; } private set { } }
+        public List<Location> Locations { get { return _locations; } private set { _locations = value; } }
 
         void IStoreApp.AddCustomer(Customer customer)
         {
@@ -99,8 +103,7 @@ namespace StoreApp.Library
         public void ReadData(string filepath)
         {
             string json = File.ReadAllText(filepath);
-            StoreApplication result = new StoreApplication();
-            result = JsonSerializer.Deserialize<StoreApplication>(json);
+            var result = JsonSerializer.Deserialize<StoreApplication>(json);
             this.Customers = result.Customers;
             this.Locations = result.Locations;
             this.Orders = result.Orders;
@@ -108,11 +111,12 @@ namespace StoreApp.Library
 
         void IStoreApp.WriteData(string Path)
         {
-            var options = new JsonSerializerOptions();
-            options.WriteIndented = true;
-            string json = JsonSerializer.Serialize(this, GetType(), options);
+            var ds = new DataContractSerializer(typeof(StoreApplication));
+            var settings = new XmlWriterSettings { Indent = true };
 
-            File.WriteAllText(Path, json);
+            using (var writer = XmlWriter.Create(Path, settings))
+                ds.WriteObject(writer, this);
+
         }
     }
 }

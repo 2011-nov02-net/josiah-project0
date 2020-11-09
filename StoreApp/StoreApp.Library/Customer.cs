@@ -1,19 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
+using System.Runtime.Serialization;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace StoreApp.Library
 {
+    [DataContract(Name = "Customer")]
     public class Customer
     {
-        public string FirstName { get; }
-        public string LastName { get; }
+        [DataMember]
+        public string FirstName { get; private set; }
+        [DataMember]
+        public string LastName { get; private set; }
 
         public Customer(string f, string l)
         {
             FirstName = f; LastName = l;
         }
+        private Customer() { }
         public bool Equals(Customer c)
         {
             if (FirstName == c.FirstName && LastName == c.LastName) return true;

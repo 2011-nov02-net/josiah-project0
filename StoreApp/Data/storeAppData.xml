@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Store_x0020_Application xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.datacontract.org/2004/07/StoreApp.Library">
+  <_customers>
+    <Customer>
+      <FirstName>Jeff</FirstName>
+      <LastName>Winger</LastName>
+    </Customer>
+    <Customer>
+      <FirstName>Britta</FirstName>
+      <LastName>Perry</LastName>
+    </Customer>
+    <Customer>
+      <FirstName>Abed</FirstName>
+      <LastName>Nadir</LastName>
+    </Customer>
+    <Customer>
+      <FirstName>Troy</FirstName>
+      <LastName>Barnes</LastName>
+    </Customer>
+    <Customer>
+      <FirstName>Shirley</FirstName>
+      <LastName>Bennett</LastName>
+    </Customer>
+    <Customer>
+      <FirstName>Annie</FirstName>
+      <LastName>Edison</LastName>
+    </Customer>
+    <Customer>
+      <FirstName>Pierce</FirstName>
+      <LastName>Hawthorne</LastName>
+    </Customer>
+    <Customer>
+      <FirstName>Jerry</FirstName>
+      <LastName>Smith</LastName>
+    </Customer>
+  </_customers>
+  <_locations>
+    <Location />
+  </_locations>
+</Store_x0020_Application>

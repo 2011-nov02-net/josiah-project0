@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace StoreApp.Library
 {
+    [DataContract(Name = "Order")]
     public class Order
     {
+        [DataMember]
         private List<Product> _items = new List<Product>();
         public List<Product> Items
         {
@@ -27,6 +30,7 @@ namespace StoreApp.Library
                 }
             }
         }
+        private Order() { }
         public string DisplayOrder()
         {
             var items = Items.Select(x => string.Format("{0}{1}{2, -5}", x.Name, " ", x.Amount));
