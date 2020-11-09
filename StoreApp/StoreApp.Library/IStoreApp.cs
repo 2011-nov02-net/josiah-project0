@@ -9,8 +9,9 @@ namespace StoreApp.Library
         public List<Order> SearchOrdersByCustomer(Customer customer);
         public List<Order> SearchOrdersByLocation(Location location);
         public void AddCustomer(Customer customer);
+        public void AddLocation(Location location);
         public void AddOrder(Order order);
-        public void WriteData();
+        public void WriteData(string Path);
         public void ReadData();
     }
 }

@@ -11,16 +11,25 @@ namespace StoreApp.Library
 
         private double _price;
         public double Price {
-            get { return _price * _discount; }
+            get { return _price * _discount * Amount; }
             private set { _price = value; }
         }
 
         private double _discount = 1;
 
-        public Product(string name, double price)
+        private int _amount;
+
+        public int Amount
+        {
+            get { return _amount; }
+            set { _amount = value; }
+        }
+
+        public Product(string name, double price, int amount)
         {
             Name = name;
             Price = price;
+            Amount = amount;
         }
         public override bool Equals(object obj)
         {

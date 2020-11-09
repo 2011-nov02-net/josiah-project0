@@ -1,6 +1,8 @@
 ﻿using StoreApp.Library;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
 
 namespace StoreApp.ConsoleApp
 {
@@ -8,6 +10,7 @@ namespace StoreApp.ConsoleApp
     {
         static void Main(string[] args)
         {
+            string filepath = @"../../../../Data/storeAppData.json";
             IStoreApp app = new StoreApplication();
 
             app.AddCustomer(new Customer("Jeff", "Winger"));
@@ -17,54 +20,46 @@ namespace StoreApp.ConsoleApp
             app.AddCustomer(new Customer("Shirley", "Bennett"));
             app.AddCustomer(new Customer("Annie", "Edison"));
             app.AddCustomer(new Customer("Pierce", "Hawthorne"));
+            app.AddCustomer(new Customer("Jerry", "Smith"));
 
-            app.AddOrder(new Order(
-                new Location("West Street"),
-                new Customer("Jerry", "Smith"),
-                new Dictionary<Product, int> { { new Product("lollipop", 1.00), 5 } }
-                ));
-            app.AddOrder(new Order(
-                new Location("West Street"),
-                new Customer("Beth", "Smith"),
-                new Dictionary<Product, int> { { new Product("gumdrop", 1.00), 1 } }
-                ));
-            app.AddOrder(new Order(
-                new Location("Doppler Emporium"),
-                new Customer("Jerry", "Smith"),
-                new Dictionary<Product, int> { { new Product("tootsie rolls", 1.00), 30 },
-                                               { new Product("cinnamon roll", 5.00), 5 },
-                                               { new Product("Cupcake", 3.00), 1 }
-                }
-                ));
-            app.AddOrder(new Order(
-                new Location("Doppler"),
-                new Customer("Rick", "Sanchez"),
-                new Dictionary<Product, int> { { new Product("pop rocks", 2.00), 5 } }
-                ));
+            app.AddLocation(new Location("West Street"));
+            app.AddLocation(new Location("Doppler Emporium"));
 
             try
             {
                 app.AddOrder(new Order(
                     new Location("West Street"),
                     new Customer("Jerry", "Smith"),
-                    new Dictionary<Product, int> { { new Product("lollipop", 1.00), 50 } }
+                    new List<Product>
+                    {
+                        new Product("lollipop", 1.00, 50),
+                        new Product("cupcake", 3.00, 3),
+                        new Product("muffin", 5.00, 1)
+                    }
                     ));
+                
             }
-            catch (ArgumentException)
+            catch (ArgumentException e)
             {
-
+                Console.WriteLine(e.Message);
             }
 
 
-            //var test = app.SearchOrdersByCustomer(new Customer("Jerry", "Smith"));
+            var test = app.SearchOrdersByCustomer(new Customer("Jerry", "Smith"));
 
-            var test = app.SearchOrdersByLocation(new Location("West Street"));
+            //var test = app.SearchOrdersByLocation(new Location("West Street"));
 
 
             foreach (var x in test)
             {
-                x.displayOrder();
+                x.DisplayOrderToConsole();
             }
+
+            //app.WriteData(filepath);
+
+            //string json = JsonSerializer.Serialize(app.SearchOrdersByCustomer(new Customer("Jerry", "Smith")));
+            //File.WriteAllText(filepath, json);
+
         }
     }
 }

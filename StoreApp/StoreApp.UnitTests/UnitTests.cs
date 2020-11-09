@@ -4,7 +4,7 @@ using StoreApp.Library;
 
 namespace StoreApp.UnitTests
 {
-    public class ProductTests
+    public class UnitTests
     {
         [Fact]
         public void ProductInstantiation()
@@ -41,6 +41,10 @@ namespace StoreApp.UnitTests
             Assert.True(test.Price == original_price);
         }
 
+        [Fact]
+        public void OrderTooLargeTest()
+        {
 
+        }
     }
 }
