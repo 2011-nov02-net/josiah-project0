@@ -12,9 +12,12 @@ namespace StoreApp.ConsoleApp
         {
             string writepath = @"../../../../Data/storeAppData.json";
             string readpath = @"../../../../Data/readFromData.json";
+
             IStoreApp app = new StoreApplication();
 
-            
+            app.ReadData(readpath);
+
+            /*
             app.AddCustomer(new Customer("Jeff", "Winger"));
             app.AddCustomer(new Customer("Britta", "Perry"));
             app.AddCustomer(new Customer("Abed", "Nadir"));
@@ -32,7 +35,7 @@ namespace StoreApp.ConsoleApp
                                     new Product("cupcake", 3.00, 20),
                                     new Product("muffin", 5.00, 30)
                 });
-
+            */
             
             try
             {

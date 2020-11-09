@@ -87,7 +87,7 @@ namespace StoreApp.UnitTests
             Assert.True(test.Customer == cust);
         }
         [Fact]
-        public void PlaceOrderExceptionTest()
+        public void PlaceOrderExceptionTest1()
         {
             IStoreApp app = new StoreApplication();
             Customer cust = new Customer("Jotaro", "Kujo");
@@ -100,6 +100,60 @@ namespace StoreApp.UnitTests
             app.AddInventoryToLocation(loc, new List<Product> { prod });
 
             Order ord2 = new Order(loc, cust, new List<Product> { new Product("Polnareff", 50, 1) });
+
+            Assert.Throws<ArgumentException>(() => app.AddOrder(ord2));
+        }
+        
+        [Fact]
+        public void PlaceOrderExceptionTest2()
+        {
+            IStoreApp app = new StoreApplication();
+            Customer cust = new Customer("Jotaro", "Kujo");
+            Location loc = new Location("Egypt");
+            Product prod = new Product("Dio", 100, 1);
+            Order ord = new Order(loc, cust, new List<Product> { prod });
+
+            app.AddCustomer(cust);
+            app.AddLocation(loc);
+            app.AddInventoryToLocation(loc, new List<Product> { prod });
+
+            Order ord2 = new Order(loc, cust, new List<Product> { new Product("Dio", 100, 10) });
+
+            Assert.Throws<ArgumentException>(() => app.AddOrder(ord2));
+        }
+        
+        [Fact]
+        public void PlaceOrderExceptionTest3()
+        {
+            IStoreApp app = new StoreApplication();
+            Customer cust = new Customer("Jotaro", "Kujo");
+            Location loc = new Location("Egypt");
+            Product prod = new Product("Dio", 100, 1);
+            Order ord = new Order(loc, cust, new List<Product> { prod });
+
+            app.AddCustomer(cust);
+            app.AddLocation(loc);
+            app.AddInventoryToLocation(loc, new List<Product> { prod });
+
+            Order ord2 = new Order(loc, new Customer("Joseph", "Joestar"), new List<Product> { new Product("Dio", 100, 1) });
+
+            Assert.Throws<ArgumentException>(() => app.AddOrder(ord2));
+        }
+                
+        [Fact]
+        public void PlaceOrderExceptionTest4()
+        {
+            IStoreApp app = new StoreApplication();
+            Customer cust = new Customer("Jotaro", "Kujo");
+            Location loc = new Location("Egypt");
+            Product prod = new Product("Dio", 100, 1);
+            Order ord = new Order(loc, cust, new List<Product> { prod });
+
+            app.AddCustomer(cust);
+            app.AddLocation(loc);
+            app.AddInventoryToLocation(loc, new List<Product> { prod });
+
+            Order ord2 = new Order(new Location("Japan"), cust, new List<Product> { new Product("Dio", 100, 1) });
 
             Assert.Throws<ArgumentException>(() => app.AddOrder(ord2));
         }

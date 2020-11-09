@@ -4,6 +4,7 @@ using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
+using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Xml;
 
@@ -95,11 +96,14 @@ namespace StoreApp.Library
             addition.AddItems(product);
         }
 
-        public static StoreApplication ReadData(string filepath)
+        public void ReadData(string filepath)
         {
             string json = File.ReadAllText(filepath);
-            StoreApplication result = JsonSerializer.Deserialize<StoreApplication>(json);
-            return result;
+            StoreApplication result = new StoreApplication();
+            result = JsonSerializer.Deserialize<StoreApplication>(json);
+            this.Customers = result.Customers;
+            this.Locations = result.Locations;
+            this.Orders = result.Orders;
         }
 
         void IStoreApp.WriteData(string Path)
