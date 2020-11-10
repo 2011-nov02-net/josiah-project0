@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Store_x0020_Application xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.datacontract.org/2004/07/StoreApp.Library">
-  <_customers>
+<StoreApplication xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.datacontract.org/2004/07/StoreApp.Library">
+  <Customers>
     <Customer>
       <FirstName>Jeff</FirstName>
       <LastName>Winger</LastName>
@@ -33,8 +33,45 @@
       <FirstName>Jerry</FirstName>
       <LastName>Smith</LastName>
     </Customer>
-  </_customers>
-  <_locations>
-    <Location />
-  </_locations>
-</Store_x0020_Application>
+  </Customers>
+  <Locations>
+    <Location>
+      <Name>West Street</Name>
+    </Location>
+    <Location>
+      <Name>Doppler Emporium</Name>
+    </Location>
+  </Locations>
+  <Orders>
+    <Order>
+      <Customer>
+        <FirstName>Jerry</FirstName>
+        <LastName>Smith</LastName>
+      </Customer>
+      <Location>
+        <Name>West Street</Name>
+      </Location>
+      <Time>2020-11-09T15:55:09.190087-08:00</Time>
+      <_items>
+        <Product>
+          <Amount>50</Amount>
+          <Name>lollipop</Name>
+          <Price>1</Price>
+          <_discount>1</_discount>
+        </Product>
+        <Product>
+          <Amount>3</Amount>
+          <Name>cupcake</Name>
+          <Price>3</Price>
+          <_discount>1</_discount>
+        </Product>
+        <Product>
+          <Amount>1</Amount>
+          <Name>muffin</Name>
+          <Price>5</Price>
+          <_discount>1</_discount>
+        </Product>
+      </_items>
+    </Order>
+  </Orders>
+</StoreApplication>

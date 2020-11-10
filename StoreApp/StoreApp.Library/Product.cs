@@ -10,18 +10,19 @@ namespace StoreApp.Library
     public class Product
     {
         [DataMember]
-        public string Name { get; }
+        public string Name { get; private set; }
 
         private double _price;
+        [DataMember]
         public double Price {
             get { return _price * _discount; }
             private set { _price = value; }
         }
-
+        [DataMember]
         private double _discount = 1;
 
         private int _amount;
-
+        [DataMember]
         public int Amount
         {
             get { return _amount; }

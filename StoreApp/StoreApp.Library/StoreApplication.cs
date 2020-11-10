@@ -12,17 +12,20 @@ using System.Xml.Serialization;
 
 namespace StoreApp.Library
 {
-    [DataContract(Name = "Store Application")]
+    [DataContract(Name = "StoreApplication")]
     public class StoreApplication : IStoreApp
     {
-        [DataMember]
+
         private List<Customer> _customers = new List<Customer>();
+        [DataMember]
         public List<Customer> Customers { get { return _customers; } private set { _customers = value; } }
-        [DataMember]
+
         private List<Order> _orders = new List<Order>();
-        public List<Order> Orders { get { return _orders; } private set { _orders = value; } }
         [DataMember]
+        public List<Order> Orders { get { return _orders; } private set { _orders = value; } }
+
         private List<Location> _locations = new List<Location>();
+        [DataMember]
         public List<Location> Locations { get { return _locations; } private set { _locations = value; } }
 
         void IStoreApp.AddCustomer(Customer customer)
@@ -100,23 +103,29 @@ namespace StoreApp.Library
             addition.AddItems(product);
         }
 
-        public void ReadData(string filepath)
+        public void ReadData(string path)
         {
-            string json = File.ReadAllText(filepath);
-            var result = JsonSerializer.Deserialize<StoreApplication>(json);
-            this.Customers = result.Customers;
-            this.Locations = result.Locations;
-            this.Orders = result.Orders;
+            FileStream fs = new FileStream(path, FileMode.Open);
+            var reader = XmlDictionaryReader.CreateTextReader(fs, new XmlDictionaryReaderQuotas());
+            DataContractSerializer ser = new DataContractSerializer(typeof(StoreApplication));
+
+            StoreApplication app = (StoreApplication)ser.ReadObject(reader, true);
+
+            reader.Close();
+            fs.Close();
+
+            this.Customers = app.Customers;
+            this.Locations = app.Locations;
+            this.Orders = app.Orders;
         }
 
-        void IStoreApp.WriteData(string Path)
+        void IStoreApp.WriteData(string path)
         {
             var ds = new DataContractSerializer(typeof(StoreApplication));
             var settings = new XmlWriterSettings { Indent = true };
 
-            using (var writer = XmlWriter.Create(Path, settings))
+            using (var writer = XmlWriter.Create(path, settings))
                 ds.WriteObject(writer, this);
-
         }
     }
 }

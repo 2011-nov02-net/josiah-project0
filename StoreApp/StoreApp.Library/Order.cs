@@ -15,9 +15,12 @@ namespace StoreApp.Library
         {
             get { return _items; }
         }
-        public Location Location { get; }
-        public Customer Customer { get; }
-        public DateTime Time { get; }
+        [DataMember]
+        public Location Location { get; private set; }
+        [DataMember]
+        public Customer Customer { get; private set; }
+        [DataMember]
+        public DateTime Time { get; private set; }
 
         public Order(Location l, Customer c, List<Product> p)
         {

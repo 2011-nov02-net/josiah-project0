@@ -9,7 +9,7 @@ namespace StoreApp.Library
     public class Location
     {
         [DataMember]
-        public string Name { get; }
+        public string Name { get; private set; }
 
         public Location(string name)
         {
