@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
+using System.Text;
 using System.Text.Json;
 using System.Xml;
 using System.Xml.Serialization;
@@ -17,15 +18,15 @@ namespace StoreApp.Library
     {
 
         private List<Customer> _customers = new List<Customer>();
-        [DataMember]
+        [DataMember(Order=0)]
         public List<Customer> Customers { get { return _customers; } private set { _customers = value; } }
 
         private List<Order> _orders = new List<Order>();
-        [DataMember]
+        [DataMember(Order=1)]
         public List<Order> Orders { get { return _orders; } private set { _orders = value; } }
 
         private List<Location> _locations = new List<Location>();
-        [DataMember]
+        [DataMember(Order=2)]
         public List<Location> Locations { get { return _locations; } private set { _locations = value; } }
 
         void IStoreApp.AddCustomer(Customer customer)

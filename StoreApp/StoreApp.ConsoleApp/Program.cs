@@ -11,11 +11,14 @@ namespace StoreApp.ConsoleApp
         static void Main(string[] args)
         {
             string writepath = @"../../../../Data/storeAppData.xml";
-            string readpath = @"../../../../Data/readFromData.json";
+
+            string readpath = @"../../../../Data/readAppdata.xml";
 
             IStoreApp app = new StoreApplication();
 
-            
+            app.ReadData(readpath);
+
+            /*
             app.AddCustomer(new Customer("Jeff", "Winger"));
             app.AddCustomer(new Customer("Britta", "Perry"));
             app.AddCustomer(new Customer("Abed", "Nadir"));
@@ -33,7 +36,7 @@ namespace StoreApp.ConsoleApp
                                     new Product("cupcake", 3.00, 20),
                                     new Product("muffin", 5.00, 30)
                 });
-            
+            */
             
             try
             {
@@ -65,7 +68,7 @@ namespace StoreApp.ConsoleApp
                 Console.WriteLine(x.DisplayOrder());
             }
 
-            app.WriteData(writepath);
+            //app.WriteData(writepath);
         }
     }
 }

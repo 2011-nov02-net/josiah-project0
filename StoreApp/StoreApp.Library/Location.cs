@@ -17,9 +17,11 @@ namespace StoreApp.Library
         }
         private Location() { }
         private List<Product> _inventory = new List<Product>();
+        [DataMember]
         public List<Product> Inventory
         {
             get { return _inventory; }
+            private set { _inventory = value; }
         }
 
         public bool Equals(Location l)

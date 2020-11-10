@@ -44,25 +44,25 @@
         <Inventory />
         <Name>West Street</Name>
       </Location>
-      <Time>2020-11-10T07:29:09.9438583-08:00</Time>
+      <Time>2020-11-10T07:10:55.317383-08:00</Time>
       <_items>
         <Product>
           <Amount>50</Amount>
-          <Discount>1</Discount>
           <Name>lollipop</Name>
           <Price>1</Price>
+          <_discount>1</_discount>
         </Product>
         <Product>
           <Amount>3</Amount>
-          <Discount>1</Discount>
           <Name>cupcake</Name>
           <Price>3</Price>
+          <_discount>1</_discount>
         </Product>
         <Product>
           <Amount>1</Amount>
-          <Discount>1</Discount>
           <Name>muffin</Name>
           <Price>5</Price>
+          <_discount>1</_discount>
         </Product>
       </_items>
     </Order>
@@ -72,21 +72,21 @@
       <Inventory>
         <Product>
           <Amount>300</Amount>
-          <Discount>1</Discount>
           <Name>lollipop</Name>
           <Price>1</Price>
+          <_discount>1</_discount>
         </Product>
         <Product>
           <Amount>20</Amount>
-          <Discount>1</Discount>
           <Name>cupcake</Name>
           <Price>3</Price>
+          <_discount>1</_discount>
         </Product>
         <Product>
           <Amount>30</Amount>
-          <Discount>1</Discount>
           <Name>muffin</Name>
           <Price>5</Price>
+          <_discount>1</_discount>
         </Product>
       </Inventory>
       <Name>West Street</Name>

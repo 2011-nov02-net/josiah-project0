@@ -1,8 +1,5 @@
-﻿using Microsoft.VisualBasic.CompilerServices;
-using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel;
 using System.Runtime.Serialization;
-using System.Text;
 
 namespace StoreApp.Library
 {
@@ -15,11 +12,13 @@ namespace StoreApp.Library
         private double _price;
         [DataMember]
         public double Price {
-            get { return _price * _discount; }
+            get { return _price * Discount; }
             private set { _price = value; }
         }
-        [DataMember]
-        private double _discount = 1;
+
+        private double _discount;
+        [DataMember, DefaultValue(1)]
+        public double Discount { get { return _discount; } private set { _discount = value; } }
 
         private int _amount;
         [DataMember]
@@ -31,11 +30,12 @@ namespace StoreApp.Library
 
         public Product(string name, double price, int amount)
         {
-            Name = name;
-            Price = price;
-            Amount = amount;
+            Name = name; Price = price; Amount = amount; Discount = 1;
         }
-        private Product() { }
+        private Product(string name, double price, int amount, double discount)
+        {
+            Name = name; Price = price; Amount = amount; Discount = discount;
+        }
         public override bool Equals(object obj)
         {
             return (((Product)obj).Name == this.Name);

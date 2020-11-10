@@ -14,6 +14,7 @@ namespace StoreApp.Library
         public List<Product> Items
         {
             get { return _items; }
+            private set { _items = value; }
         }
         [DataMember]
         public Location Location { get; private set; }
