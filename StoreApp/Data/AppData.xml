@@ -36,6 +36,15 @@
   </Customers>
   <Orders>
     <Order>
+      <Customer>
+        <FirstName>Jerry</FirstName>
+        <LastName>Smith</LastName>
+      </Customer>
+      <Location>
+        <Inventory />
+        <Name>West Street</Name>
+      </Location>
+      <Time>2020-11-12T07:58:18.9849499-08:00</Time>
       <_items>
         <Product>
           <Amount>50</Amount>
@@ -56,15 +65,6 @@
           <Price>5</Price>
         </Product>
       </_items>
-      <Location>
-        <Inventory />
-        <Name>West Street</Name>
-      </Location>
-      <Customer>
-        <FirstName>Jerry</FirstName>
-        <LastName>Smith</LastName>
-      </Customer>
-      <Time>2020-11-10T12:01:32.0702697-08:00</Time>
     </Order>
   </Orders>
   <Locations>

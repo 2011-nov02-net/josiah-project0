@@ -10,34 +10,37 @@ namespace StoreApp.ConsoleApp
     {
         static void Main(string[] args)
         {
-            string writepath = @"../../../../Data/storeAppData.xml";
-
-            string readpath = @"../../../../Data/readAppdata.xml";
+            string filepath = @"../../../../Data/AppData.xml";
 
             IStoreApp app = new StoreApplication();
 
-            app.ReadData(readpath);
+            int write_flag = 0;
 
-            /*
-            app.AddCustomer(new Customer("Jeff", "Winger"));
-            app.AddCustomer(new Customer("Britta", "Perry"));
-            app.AddCustomer(new Customer("Abed", "Nadir"));
-            app.AddCustomer(new Customer("Troy", "Barnes"));
-            app.AddCustomer(new Customer("Shirley", "Bennett"));
-            app.AddCustomer(new Customer("Annie", "Edison"));
-            app.AddCustomer(new Customer("Pierce", "Hawthorne"));
-            app.AddCustomer(new Customer("Jerry", "Smith"));
+            if (write_flag == 1)
+            {
+                app.AddCustomer(new Customer("Jeff", "Winger"));
+                app.AddCustomer(new Customer("Britta", "Perry"));
+                app.AddCustomer(new Customer("Abed", "Nadir"));
+                app.AddCustomer(new Customer("Troy", "Barnes"));
+                app.AddCustomer(new Customer("Shirley", "Bennett"));
+                app.AddCustomer(new Customer("Annie", "Edison"));
+                app.AddCustomer(new Customer("Pierce", "Hawthorne"));
+                app.AddCustomer(new Customer("Jerry", "Smith"));
 
-            app.AddLocation(new Location("West Street"));
-            app.AddLocation(new Location("Doppler Emporium"));
+                app.AddLocation(new Location("West Street"));
+                app.AddLocation(new Location("Doppler Emporium"));
 
-            app.AddInventoryToLocation(new Location("West Street"),
-                new List<Product> { new Product("lollipop", 1.00, 300),
+                app.AddInventoryToLocation(new Location("West Street"),
+                    new List<Product> { new Product("lollipop", 1.00, 300),
                                     new Product("cupcake", 3.00, 20),
                                     new Product("muffin", 5.00, 30)
-                });
-            */
-            
+                    });
+            }
+            else
+            {
+                app.ReadData(filepath);
+            }
+
             try
             {
                 app.AddOrder(new Order(
@@ -68,7 +71,10 @@ namespace StoreApp.ConsoleApp
                 Console.WriteLine(x.DisplayOrder());
             }
 
-            //app.WriteData(writepath);
+            if (write_flag == 1)
+            {
+                app.WriteData(filepath);
+            }
         }
     }
 }

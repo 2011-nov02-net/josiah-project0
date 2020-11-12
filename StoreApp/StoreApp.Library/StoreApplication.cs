@@ -16,7 +16,6 @@ namespace StoreApp.Library
     [DataContract(Name = "StoreApplication")]
     public class StoreApplication : IStoreApp
     {
-
         private List<Customer> _customers = new List<Customer>();
         [DataMember(Order=0)]
         public List<Customer> Customers { get { return _customers; } private set { _customers = value; } }
@@ -62,7 +61,7 @@ namespace StoreApp.Library
             {
                 if (!l.Inventory.Contains(x))
                 {
-                    throw new ArgumentException("Can't place item for order that does not exist");
+                    throw new ArgumentException("Can't place order for item that does not exist");
                 }
                 if (l.Inventory.Find(y => y == x).Amount < x.Amount)
                 {
@@ -104,7 +103,7 @@ namespace StoreApp.Library
             addition.AddItems(product);
         }
 
-        public void ReadData(string path)
+        void IStoreApp.ReadData(string path)
         {
             FileStream fs = new FileStream(path, FileMode.Open);
             var reader = XmlDictionaryReader.CreateTextReader(fs, new XmlDictionaryReaderQuotas());

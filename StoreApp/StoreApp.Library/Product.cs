@@ -3,9 +3,21 @@ using System.Runtime.Serialization;
 
 namespace StoreApp.Library
 {
-    [DataContract()]
+    [DataContract(Name = "Product")]
     public class Product
     {
+        private int _amount;
+        [DataMember]
+        public int Amount
+        {
+            get { return _amount; }
+            set { _amount = value; }
+        }
+
+        private double _discount;
+        [DataMember]
+        public double Discount { get { return _discount; } private set { _discount = value; } }
+
         [DataMember]
         public string Name { get; private set; }
 
@@ -16,18 +28,6 @@ namespace StoreApp.Library
             private set { _price = value; }
         }
 
-        private double _discount;
-        [DataMember, DefaultValue(1)]
-        public double Discount { get { return _discount; } private set { _discount = value; } }
-
-        private int _amount;
-        [DataMember]
-        public int Amount
-        {
-            get { return _amount; }
-            set { _amount = value; }
-        }
-
         public Product(string name, double price, int amount)
         {
             Name = name; Price = price; Amount = amount; Discount = 1;
@@ -36,6 +36,7 @@ namespace StoreApp.Library
         {
             Name = name; Price = price; Amount = amount; Discount = discount;
         }
+        private Product() { }
         public override bool Equals(object obj)
         {
             return (((Product)obj).Name == this.Name);
