@@ -28,12 +28,14 @@ namespace StoreApp.Library
         [DataMember(Order=2)]
         public List<Location> Locations { get { return _locations; } private set { _locations = value; } }
 
+        private StoreRepository DataRepo;
+
+        public StoreApplication(StreamWriter logger) { DataRepo = new StoreRepository(logger); }
+        public StoreApplication() { DataRepo = new StoreRepository(); }
+
         void IStoreApp.AddCustomer(Customer customer)
         {
-            if (!_customers.Contains(customer))
-            {
-                _customers.Add(customer);
-            }
+            DataRepo.AddCustomer(customer);
         }
 
         void IStoreApp.AddLocation(Location location)
@@ -126,6 +128,16 @@ namespace StoreApp.Library
 
             using (var writer = XmlWriter.Create(path, settings))
                 ds.WriteObject(writer, this);
+        }
+
+        public List<Customer> showCustomers()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Location> showLocations()
+        {
+            throw new NotImplementedException();
         }
     }
 }

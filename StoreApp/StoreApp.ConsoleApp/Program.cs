@@ -10,6 +10,17 @@ namespace StoreApp.ConsoleApp
     {
         static void Main(string[] args)
         {
+
+
+            StreamWriter logger = new StreamWriter("../../../../ef-log.txt");
+
+            IStoreApp app = new StoreApplication(logger);
+
+
+            app.AddCustomer(new Customer("Jerry", "Smith"));
+
+
+            /*
             string filepath = @"../../../../Data/AppData.xml";
 
             IStoreApp app = new StoreApplication();
@@ -74,7 +85,10 @@ namespace StoreApp.ConsoleApp
             if (write_flag == 1)
             {
                 app.WriteData(filepath);
-            }
+            } */
+
+
+
         }
     }
 }

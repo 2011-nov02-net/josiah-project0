@@ -10,6 +10,7 @@ namespace StoreApp.DataModel
     {
         public StoredbContext()
         {
+
         }
 
         public StoredbContext(DbContextOptions<StoredbContext> options)
