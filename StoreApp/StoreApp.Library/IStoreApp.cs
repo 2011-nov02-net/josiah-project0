@@ -13,9 +13,12 @@ namespace StoreApp.Library
         public List<Customer> ShowCustomers();
         public void AddLocation(Location location);
         public List<Location> ShowLocations();
+        public List<Product> ShowProducts();
+        public void AddProduct(Product product);
         public void AddOrder(Order order);
         public void AddInventoryToLocation(Location location, List<Product> product);
-        public void ReadData(string Path);
-        public void WriteData(string Path);
+        public List<Product> ShowLocationInventory(Location location);
+        /*public void ReadData(string Path);
+        public void WriteData(string Path);*/
     }
 }

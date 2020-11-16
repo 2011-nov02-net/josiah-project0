@@ -11,27 +11,32 @@ namespace StoreApp.ConsoleApp
         static void Main(string[] args)
         {
 
-
             StreamWriter logger = new StreamWriter("../../../../ef-log.txt");
 
             IStoreApp app = new StoreApplication(logger);
 
+            var result = app.ShowLocationInventory(new Location("Target"));
 
-          //  var orders = app.ShowOrders();
+            foreach (var x in result)
+            {
+                Console.WriteLine(x.Name);
+            }
 
-            //  var orders = app.ShowOrdersByCustomer(new Customer("Jerry", "Smith", 1));
-            //   var orders = app.ShowOrdersByCustomer(new Customer("Morty", "Smith", 1));
+            /*
+            var orders = app.ShowOrders();
 
-            //   var orders = app.ShowOrdersByLocation(new Location("Walmart"));
-            //   var orders = app.ShowOrdersByLocation(new Location("Target"));
+            var orders = app.ShowOrdersByCustomer(new Customer("Jerry", "Smith", 1));
+            var orders = app.ShowOrdersByCustomer(new Customer("Morty", "Smith", 1));
 
-            var walmart = new Location("Walmart");
+            var orders = app.ShowOrdersByLocation(new Location("Walmart"));
+            var orders = app.ShowOrdersByLocation(new Location("Target"));
+
+            var walmart = new Location("Target");
             var newItems = new List<Product>();
 
-            newItems.Add(new Product("TShirt", 5.00, 15));
+            newItems.Add(new Product("Jerry Can", 25.00, 3));
 
             app.AddInventoryToLocation(walmart, newItems);
-
 
             /*
             string filepath = @"../../../../Data/AppData.xml";
@@ -99,8 +104,6 @@ namespace StoreApp.ConsoleApp
             {
                 app.WriteData(filepath);
             } */
-
-
 
         }
     }

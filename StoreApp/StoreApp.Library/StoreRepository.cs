@@ -21,7 +21,6 @@ namespace StoreApp.Library
             json = File.ReadAllText(path);
             return JsonSerializer.Deserialize<string>(json);
         }
-
         public StoreRepository(StreamWriter logger)
         {
             var optionsBuilder = new DbContextOptionsBuilder<StoredbContext>();
@@ -29,14 +28,12 @@ namespace StoreApp.Library
             optionsBuilder.LogTo(logger.WriteLine, LogLevel.Information);
             _contextOptions = optionsBuilder.Options;
         }
-
         public StoreRepository()
         {
             var optionsBuilder = new DbContextOptionsBuilder<StoredbContext>();
             optionsBuilder.UseSqlServer(StoreRepository.GetConnectionString());
             _contextOptions = optionsBuilder.Options;
         }
-
         public void AddCustomer(Customer customer)
         {
             using var context = new StoredbContext(_contextOptions);
@@ -58,6 +55,17 @@ namespace StoreApp.Library
             context.Locations.Add(new_location);
             context.SaveChanges();
         }
+        public void AddProduct(Product product)
+        {
+            using var context = new StoredbContext(_contextOptions);
+            var new_product = new DataModel.Product
+            {
+                Name = product.Name,
+                Price = (decimal)product.Price
+            };
+            context.Products.Add(new_product);
+            context.SaveChanges();
+        }
         public void AddOrder(Order order)
         {
             /*
@@ -68,6 +76,65 @@ namespace StoreApp.Library
             };
             context.Locations.Add(new_order);
             context.SaveChanges(); */
+        }
+        public List<Product> GetLocationInventory(Location l)
+        {
+            using var context = new StoredbContext(_contextOptions);
+            List<Product> result = new List<Product>();
+
+            var location = context.LocationLines
+                .Include(x => x.Location)
+                .Include(x => x.Product)
+                .Where(x => x.Location.Name == l.Name).ToList();
+
+            foreach (var x in location)
+            {
+                result.Add(new Product(x.Product.Name, (double)x.Product.Price, (int)x.Quantity));
+            }
+            return result;
+        }
+        public List<Customer> AllCustomers()
+        {
+            using var context = new StoredbContext(_contextOptions);
+
+            List<Customer> result = new List<Customer>();
+
+            var customers = context.Customers.ToList();
+
+            foreach (var customer in customers)
+            {
+                result.Add(new Customer(customer.FirstName, customer.LastName, customer.Id));
+            }
+            return result;
+        }
+        public List<Location> AllLocations()
+        {
+            using var context = new StoredbContext(_contextOptions);
+
+            List<Location> result = new List<Location>();
+
+            var locations = context.Locations.ToList();
+
+            foreach (var location in locations)
+            {
+                result.Add(new Location(location.Name));
+            }
+            return result;
+        }
+        public List<Product> AllProducts()
+        {
+            using var context = new StoredbContext(_contextOptions);
+
+            List<Product> result = new List<Product>();
+
+            var products = context.Products.ToList();
+
+            foreach (var product in products)
+            {
+                result.Add(new Product(product.Name, (double)product.Price, 1));
+            }
+            return result;
+
         }
         public List<Order> OrdersByCustomer(Customer customer)
         {
@@ -133,12 +200,7 @@ namespace StoreApp.Library
             {
                 if (!context.Products.Any(x => x.Name == product.Name))
                 {
-                    var newProduct = new DataModel.Product
-                    {
-                        Name = product.Name,
-                        Price = (decimal)product.Price
-                    };
-                    context.Products.Add(newProduct);
+                    AddProduct(product);
                 }
                 var productID = context.Products.Where(x => x.Name == product.Name).First().Id;
 

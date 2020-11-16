@@ -21,6 +21,10 @@ namespace StoreApp.Library
         {
             FirstName = f; LastName = l; ID = id;
         }
+        public Customer(string f, string l)
+        {
+            FirstName = f; LastName = l; ID = 0;
+        }
         private Customer() { }
         public bool Equals(Customer c)
         {
