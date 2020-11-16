@@ -11,13 +11,15 @@ namespace StoreApp.Library
     public class Customer
     {
         [DataMember]
-        public string FirstName { get; private set; }
+        public string FirstName { get; }
         [DataMember]
-        public string LastName { get; private set; }
+        public string LastName { get; }
 
-        public Customer(string f, string l)
+        public int ID { get; }
+
+        public Customer(string f, string l, int id)
         {
-            FirstName = f; LastName = l;
+            FirstName = f; LastName = l; ID = id;
         }
         private Customer() { }
         public bool Equals(Customer c)

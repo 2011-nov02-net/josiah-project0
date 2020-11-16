@@ -40,10 +40,7 @@ namespace StoreApp.Library
 
         void IStoreApp.AddLocation(Location location)
         {
-            if (!_locations.Contains(location))
-            {
-                _locations.Add(location);
-            }
+            DataRepo.AddLocation(location);
         }
 
         void IStoreApp.AddOrder(Order order)
@@ -74,8 +71,8 @@ namespace StoreApp.Library
             
         }
 
-        List<Order> IStoreApp.SearchOrdersByCustomer(Customer customer)
-        {
+        List<Order> IStoreApp.ShowOrdersByCustomer(Customer customer)
+        {/*
             List<Order> result = new List<Order>();
             foreach (var x in _orders)
             {
@@ -84,11 +81,12 @@ namespace StoreApp.Library
                     result.Add(x);
                 }
             }
-            return result;
+            return result;*/
+            return DataRepo.OrdersByCustomer(customer);
         }
 
-        List<Order> IStoreApp.SearchOrdersByLocation(Location location)
-        {
+        List<Order> IStoreApp.ShowOrdersByLocation(Location location)
+        {/*
             List<Order> result = new List<Order>();
             foreach (var x in _orders)
             {
@@ -97,12 +95,15 @@ namespace StoreApp.Library
                     result.Add(x);
                 }
             }
-            return result;
+            return result;*/
+            return DataRepo.OrdersByLocation(location);
         }
         void IStoreApp.AddInventoryToLocation(Location location, List<Product> product)
-        {
+        {/*
             var addition = _locations.Find(x => x == location);
-            addition.AddItems(product);
+            addition.AddItems(product);*/
+
+            DataRepo.AddInventoryToLocation(location, product);
         }
 
         void IStoreApp.ReadData(string path)
@@ -136,6 +137,21 @@ namespace StoreApp.Library
         }
 
         public List<Location> showLocations()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Order> ShowOrders()
+        {
+            return DataRepo.AllOrders();
+        }
+
+        public List<Customer> ShowCustomers()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Location> ShowLocations()
         {
             throw new NotImplementedException();
         }

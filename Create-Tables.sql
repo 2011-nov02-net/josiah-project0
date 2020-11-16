@@ -29,16 +29,22 @@ create table [Order] (
 	Total money
 )
 
+alter table [Order]
+add Date datetime not null default(getdate())
+
 --drop table OrderLines
 create table OrderLines (
 	OrderID int not null foreign key references [Order](ID),
 	ProductID int not null foreign key references Product(ID),
+	primary key (OrderID, ProductID),
 	Quantity int not null check (Quantity > 0),
 	Discount decimal default(1)
 	)
 
+--drop table LocationLines
 create table LocationLines (
 	LocationID int not null foreign key references Location(ID),
 	ProductID int not null foreign key references Product(ID),
+	primary key (LocationID, ProductID),
 	Quantity int check (Quantity > 0)
 	)

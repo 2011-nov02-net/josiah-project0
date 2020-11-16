@@ -34,6 +34,17 @@ namespace StoreApp.Library
                 }
             }
         }
+        public Order(Location l, Customer c, List<Product> p, DateTime t)
+        {
+            Location = l; Customer = c; Time = t; _items = p;
+            foreach (var x in p)
+            {
+                if (x.Amount < 0 || x.Amount > 50)
+                {
+                    throw new ArgumentException($"Item quantity ({x.Name}:{x.Amount}) out of range");
+                }
+            }
+        }
         private Order() { }
         public string DisplayOrder()
         {

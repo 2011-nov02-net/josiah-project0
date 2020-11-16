@@ -10,7 +10,6 @@ namespace StoreApp.DataModel
     {
         public StoredbContext()
         {
-
         }
 
         public StoredbContext(DbContextOptions<StoredbContext> options)
@@ -55,23 +54,24 @@ namespace StoreApp.DataModel
 
             modelBuilder.Entity<LocationLine>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => new { e.LocationId, e.ProductId })
+                    .HasName("PK__Location__2CBE6819C114DDC7");
 
                 entity.Property(e => e.LocationId).HasColumnName("LocationID");
 
                 entity.Property(e => e.ProductId).HasColumnName("ProductID");
 
                 entity.HasOne(d => d.Location)
-                    .WithMany()
+                    .WithMany(p => p.LocationLines)
                     .HasForeignKey(d => d.LocationId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__LocationL__Locat__02084FDA");
+                    .HasConstraintName("FK__LocationL__Locat__245D67DE");
 
                 entity.HasOne(d => d.Product)
-                    .WithMany()
+                    .WithMany(p => p.LocationLines)
                     .HasForeignKey(d => d.ProductId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__LocationL__Produ__02FC7413");
+                    .HasConstraintName("FK__LocationL__Produ__25518C17");
             });
 
             modelBuilder.Entity<Order>(entity =>
@@ -81,6 +81,10 @@ namespace StoreApp.DataModel
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
+
+                entity.Property(e => e.Date)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.LocationId).HasColumnName("LocationID");
 
@@ -101,27 +105,28 @@ namespace StoreApp.DataModel
 
             modelBuilder.Entity<OrderLine>(entity =>
             {
-                entity.HasNoKey();
-
-                entity.Property(e => e.Discount)
-                    .HasColumnType("decimal(18, 0)")
-                    .HasDefaultValueSql("((1))");
+                entity.HasKey(e => new { e.OrderId, e.ProductId })
+                    .HasName("PK__OrderLin__08D097C1331A6A6E");
 
                 entity.Property(e => e.OrderId).HasColumnName("OrderID");
 
                 entity.Property(e => e.ProductId).HasColumnName("ProductID");
 
+                entity.Property(e => e.Discount)
+                    .HasColumnType("decimal(18, 0)")
+                    .HasDefaultValueSql("((1))");
+
                 entity.HasOne(d => d.Order)
-                    .WithMany()
+                    .WithMany(p => p.OrderLines)
                     .HasForeignKey(d => d.OrderId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__OrderLine__Order__7D439ABD");
+                    .HasConstraintName("FK__OrderLine__Order__1EA48E88");
 
                 entity.HasOne(d => d.Product)
-                    .WithMany()
+                    .WithMany(p => p.OrderLines)
                     .HasForeignKey(d => d.ProductId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__OrderLine__Produ__7E37BEF6");
+                    .HasConstraintName("FK__OrderLine__Produ__1F98B2C1");
             });
 
             modelBuilder.Entity<Product>(entity =>

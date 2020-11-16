@@ -17,7 +17,20 @@ namespace StoreApp.ConsoleApp
             IStoreApp app = new StoreApplication(logger);
 
 
-            app.AddCustomer(new Customer("Jerry", "Smith"));
+          //  var orders = app.ShowOrders();
+
+            //  var orders = app.ShowOrdersByCustomer(new Customer("Jerry", "Smith", 1));
+            //   var orders = app.ShowOrdersByCustomer(new Customer("Morty", "Smith", 1));
+
+            //   var orders = app.ShowOrdersByLocation(new Location("Walmart"));
+            //   var orders = app.ShowOrdersByLocation(new Location("Target"));
+
+            var walmart = new Location("Walmart");
+            var newItems = new List<Product>();
+
+            newItems.Add(new Product("TShirt", 5.00, 15));
+
+            app.AddInventoryToLocation(walmart, newItems);
 
 
             /*
