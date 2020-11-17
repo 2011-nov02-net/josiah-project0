@@ -4,6 +4,10 @@ using System.Text;
 
 namespace StoreApp.Library
 {
+    /// <summary>
+    /// interface for the StoreApplication class, more details about each function
+    /// are in the derived class
+    /// </summary>
     public interface IStoreApp
     {
         public List<Order> ShowOrders();

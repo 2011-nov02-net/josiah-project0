@@ -15,6 +15,13 @@ namespace StoreApp.ConsoleApp
 
             IStoreApp app = new StoreApplication(logger);
 
+   
+            Console.WriteLine("(1) Place order\n" +
+                "(2) Add a new customer\n" +
+                "(3) Display Customer\n" +
+                "(4) );
+
+            /*
             app.AddOrder(new Order(
                 new Location("Target"),
                 new Customer("Morty", "Smith"),

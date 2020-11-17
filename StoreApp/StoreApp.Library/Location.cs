@@ -10,13 +10,20 @@ namespace StoreApp.Library
     {
         [DataMember]
         public string Name { get; private set; }
-
+        
+        /// <summary>
+        /// simple constructor only accepting the name of a location
+        /// </summary>
+        /// <param name="name"></param>
         public Location(string name)
         {
             Name = name;
         }
         private Location() { }
         private List<Product> _inventory = new List<Product>();
+        /// <summary>
+        /// list of products that contain the name and amount in the inventory
+        /// </summary>
         [DataMember]
         public List<Product> Inventory
         {
@@ -29,6 +36,11 @@ namespace StoreApp.Library
             if (l.Name == Name) return true;
             return false;
         }
+        /// <summary>
+        /// overloaded Equals method for use in collection operations
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public override bool Equals(object obj)
         {
             return this.Equals(obj as Location);
@@ -42,6 +54,9 @@ namespace StoreApp.Library
         {
             return (!(c1 == c2));
         }
+        /// <summary>
+        /// obsolete functions since everything is done in queries to the database
+        /// </summary>
         public void AddItems(List<Product> p)
         {
             foreach (var x in p)
@@ -57,7 +72,6 @@ namespace StoreApp.Library
                 }
             }
         }
-
         public void SellItems(Product p)
         {
             if (!_inventory.Contains(p))

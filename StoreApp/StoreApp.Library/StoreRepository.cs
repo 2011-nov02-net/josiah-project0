@@ -34,6 +34,11 @@ namespace StoreApp.Library
             optionsBuilder.UseSqlServer(StoreRepository.GetConnectionString());
             _contextOptions = optionsBuilder.Options;
         }
+        /// <summary>
+        /// These three functions perform very similarly, they take an object from the Library
+        /// and convert it into a single record in the table
+        /// </summary>
+        /// <param name="customer"></param>
         public void AddCustomer(Customer customer)
         {
             using var context = new StoredbContext(_contextOptions);
@@ -66,6 +71,12 @@ namespace StoreApp.Library
             context.Products.Add(new_product);
             context.SaveChanges();
         }
+        /// <summary>
+        /// One of the beefiest functions. It has to create the new order, then create all the subsequent orderlines
+        /// that contain each product in the order, and finally it has to update the locationlines table
+        /// to represent the change in inventory from when the order is placed.
+        /// </summary>
+        /// <param name="order"></param>
         public void AddOrder(Order order)
         {
             using var context = new StoredbContext(_contextOptions);
@@ -110,6 +121,11 @@ namespace StoreApp.Library
             }
             context.SaveChanges();
         }
+        /// <summary>
+        /// Builds a list of products from a given location by accessing locationlines
+        /// </summary>
+        /// <param name="l"></param>
+        /// <returns></returns>
         public List<Product> GetLocationInventory(Location l)
         {
             using var context = new StoredbContext(_contextOptions);
@@ -126,6 +142,12 @@ namespace StoreApp.Library
             }
             return result;
         }
+        /// <summary>
+        /// These six functions perform similarly by accessing all records from
+        /// their respective table and transforming them into business logic classes.
+        /// OrdersByCustomer and OrdersByLocation call AllOrders and filter its results
+        /// </summary>
+        /// <returns></returns>
         public List<Customer> AllCustomers()
         {
             using var context = new StoredbContext(_contextOptions);
@@ -223,6 +245,14 @@ namespace StoreApp.Library
             return result;
 
         }
+        /// <summary>
+        /// This function adds inventory to a location by adding or modifying records 
+        /// in the LocationLines table. If a product does not exist, it creates a new
+        /// product record and inserts it into the Product table and continues modifying
+        /// inventories.
+        /// </summary>
+        /// <param name="location"></param>
+        /// <param name="items"></param>
         public void AddInventoryToLocation(Location location, List<Product> items)
         {
             using var context = new StoredbContext(_contextOptions);

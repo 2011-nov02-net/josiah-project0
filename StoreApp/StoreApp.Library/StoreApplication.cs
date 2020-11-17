@@ -16,10 +16,23 @@ namespace StoreApp.Library
     [DataContract(Name = "StoreApplication")]
     public class StoreApplication : IStoreApp
     {
-
+        /// <summary>
+        /// The Repository instance that accesses the data using EF
+        /// </summary>
         private StoreRepository DataRepo;
+        /// <summary>
+        /// Overloaded constructor that takes a streamwriter object so it can log query information
+        /// </summary>
+        /// <param name="logger"></param>
         public StoreApplication(StreamWriter logger) { DataRepo = new StoreRepository(logger); }
+        /// <summary>
+        /// default constructor, does not log query information
+        /// </summary>
         public StoreApplication() { DataRepo = new StoreRepository(); }
+        /// <summary>
+        /// These next 3 classes do not perform any business logic, they just
+        /// call the approriate method from the DataRepo to insert it into the table
+        /// </summary>
         void IStoreApp.AddCustomer(Customer customer)
         {
             DataRepo.AddCustomer(customer);
@@ -32,7 +45,11 @@ namespace StoreApp.Library
         {
             DataRepo.AddProduct(product);
         }
-
+        /// <summary>
+        /// performs a few checks against the current data to see if the order is valid,
+        /// then passes it to the repository class to insert all necessary records into the database
+        /// </summary>
+        /// <param name="order"></param>
         void IStoreApp.AddOrder(Order order)
         {
             var customers = ShowCustomers();
@@ -61,6 +78,15 @@ namespace StoreApp.Library
                 }
             }
             DataRepo.AddOrder(order);
+        }
+        /// <summary>
+        /// the rest of these functions do not perform any logic themselves, but just call
+        /// the required function from the repository
+        /// </summary>
+        /// <returns></returns>
+        public List<Order> ShowOrders()
+        {
+            return DataRepo.AllOrders();
         }
         List<Order> IStoreApp.ShowOrdersByCustomer(Customer customer)
         {/*
@@ -99,7 +125,23 @@ namespace StoreApp.Library
 
             DataRepo.AddInventoryToLocation(location, product);
         }
-        
+        public List<Customer> ShowCustomers()
+        {
+            return DataRepo.AllCustomers();
+        }
+        public List<Location> ShowLocations()
+        {
+            return DataRepo.AllLocations();
+        }
+        public List<Product> ShowProducts()
+        {
+            return DataRepo.AllProducts();
+        }
+        /// <summary>
+        /// old data serialization methods, now obsolete since this class does
+        /// not contain all the fields it used to (data is now entirely stored on the database)
+        /// </summary>
+        /// <returns></returns>
         /*void IStoreApp.ReadData(string path)
         {
             FileStream fs = new FileStream(path, FileMode.Open);
@@ -123,21 +165,5 @@ namespace StoreApp.Library
             using (var writer = XmlWriter.Create(path, settings))
                 ds.WriteObject(writer, this);
         }*/
-        public List<Order> ShowOrders()
-        {
-            return DataRepo.AllOrders();
-        }
-        public List<Customer> ShowCustomers()
-        {
-            return DataRepo.AllCustomers();
-        }
-        public List<Location> ShowLocations()
-        {
-            return DataRepo.AllLocations();
-        }
-        public List<Product> ShowProducts()
-        {
-            return DataRepo.AllProducts();
-        }
     }
 }

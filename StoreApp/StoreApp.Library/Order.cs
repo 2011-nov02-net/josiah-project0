@@ -11,6 +11,9 @@ namespace StoreApp.Library
     {
         [DataMember]
         private List<Product> _items = new List<Product>();
+        /// <summary>
+        /// contains all the products in the order
+        /// </summary>
         public List<Product> Items
         {
             get { return _items; }
@@ -23,6 +26,12 @@ namespace StoreApp.Library
         [DataMember]
         public DateTime Time { get; private set; }
 
+        /// <summary>
+        /// default constructor that sets Time to now, useful for when creating a new order
+        /// </summary>
+        /// <param name="l"></param>
+        /// <param name="c"></param>
+        /// <param name="p"></param>
         public Order(Location l, Customer c, List<Product> p)
         {
             Location = l; Customer = c; Time = DateTime.Now; _items = p;
@@ -34,6 +43,14 @@ namespace StoreApp.Library
                 }
             }
         }
+        /// <summary>
+        /// overloaded constructor that accepts a time parameter so a past order
+        /// can be properly displayed
+        /// </summary>
+        /// <param name="l"></param>
+        /// <param name="c"></param>
+        /// <param name="p"></param>
+        /// <param name="t"></param>
         public Order(Location l, Customer c, List<Product> p, DateTime t)
         {
             Location = l; Customer = c; Time = t; _items = p;
@@ -45,6 +62,10 @@ namespace StoreApp.Library
                 }
             }
         }
+        /// <summary>
+        /// formats an order into a string that can be displayed in the console app.
+        /// Works with any number of items in the order.
+        /// </summary>
         private Order() { }
         public string DisplayOrder()
         {
