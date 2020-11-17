@@ -10,16 +10,58 @@ namespace StoreApp.ConsoleApp
     {
         static void Main(string[] args)
         {
-
             StreamWriter logger = new StreamWriter("../../../../ef-log.txt");
 
             IStoreApp app = new StoreApplication(logger);
 
-   
-            Console.WriteLine("(1) Place order\n" +
-                "(2) Add a new customer\n" +
-                "(3) Display Customer\n" +
-                "(4) );
+            int input = 0;
+
+            while (input != 8)
+            {
+            Menu:
+                Console.Clear();
+                Console.WriteLine("(1) Place order\n" +
+                                  "(2) Add customer\n" +
+                                  "(3) Display customers\n" +
+                                  "(4) Display orders by customer\n" +
+                                  "(5) Dispaly orders by location\n" +
+                                  "(6) Display all orders\n" +
+                                  "(7) Add inventory to location\n" +
+                                  "(8) Quit");
+                try
+                {
+                    input = System.Convert.ToInt32(Console.ReadLine());
+                    if (input < 1 || input > 8) goto Menu;
+                }
+                catch (FormatException) { goto Menu; }
+
+                Console.Clear();
+
+                switch (input)
+                {
+                    case 1:
+                        PlaceOrder(app);
+                        break;
+                    case 2:
+                        AddNewCustomer(app);
+                        break;
+                    case 3:
+                        DisplayCustomers(app);
+                        break;
+                    case 4:
+                        DisplayOrdersByCustomer(app);
+                        break;
+                    case 5:
+                        DisplayOrdersByLocation(app);
+                        break;
+                    case 6:
+                        DisplayOrders(app);
+                        break;
+                    case 7:
+                        AddInventoryToLocation(app);
+                        break;
+                }
+            }
 
             /*
             app.AddOrder(new Order(
@@ -115,6 +157,76 @@ namespace StoreApp.ConsoleApp
             {
                 app.WriteData(filepath);
             } */
+
+        }
+
+        static void PlaceOrder(IStoreApp app)
+        {
+
+        }
+        static void AddNewCustomer(IStoreApp app)
+        {
+            string[] fullname;
+            while (true)
+            {
+                Console.WriteLine("Write the first and last name of the new customer");
+                fullname = Console.ReadLine().Split(" ");
+                if (fullname.Length == 2) break;
+                Console.WriteLine("Incorrect format");
+            }
+            app.AddCustomer(new Customer(fullname[0], fullname[1]));
+
+        }
+        static void DisplayCustomers(IStoreApp app)
+        {
+            var customers = app.ShowCustomers();
+
+            foreach (var x in customers)
+            {
+                Console.WriteLine($"ID: {x.ID, -3}|{x.FirstName, 7} {x.LastName,-5}");
+            }
+            Console.ReadKey();
+        }
+        static void DisplayOrders(IStoreApp app)
+        {
+            var orders = app.ShowOrders();
+
+            foreach (var x in orders)
+            {
+                Console.WriteLine(x.DisplayOrder());
+            }
+        }
+        static void DisplayOrdersByLocation(IStoreApp app)
+        {
+            var locations = app.ShowLocations();
+            string[] storeName = { };
+
+            while (storeName.Length != 1)
+            {
+                Console.WriteLine("Enter the location name");
+                storeName = Console.ReadLine().Split(" ");
+                if (storeName.Length != 1)
+                {
+                    Console.WriteLine("Incorrect format");
+                    continue;
+                }
+                var orders = app.ShowOrdersByLocation(new Location(storeName[0]));
+                if (orders.Count == 0)
+                {
+                    Console.WriteLine("Invalid store name");
+
+                }
+            }
+
+
+
+        }
+        static void DisplayOrdersByCustomer(IStoreApp app)
+        {
+
+        }
+        static void AddInventoryToLocation(IStoreApp app)
+        {
 
         }
     }
