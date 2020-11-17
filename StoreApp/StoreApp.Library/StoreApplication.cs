@@ -47,19 +47,20 @@ namespace StoreApp.Library
                 throw new ArgumentException("Can not place an order at a location that does not exist");
             }
 
-            var l = locations.Find(x => x.Name == order.Location.Name);
+            var l = DataRepo.GetLocationInventory(order.Location);
 
             foreach (var x in order.Items)
             {
-                if (!l.Inventory.Contains(x))
+                if (!l.Contains(x))
                 {
-                    throw new ArgumentException("Can't place order for item that does not exist");
+                    throw new ArgumentException("Can't place order for item that does not exist in inventory");
                 }
-                if (l.Inventory.Find(y => y == x).Amount < x.Amount)
+                if (l.Find(y => y == x).Amount < x.Amount)
                 {
                     throw new ArgumentException("Can't order more of an item than exists in inventory");
                 }
-            }        
+            }
+            DataRepo.AddOrder(order);
         }
         List<Order> IStoreApp.ShowOrdersByCustomer(Customer customer)
         {/*

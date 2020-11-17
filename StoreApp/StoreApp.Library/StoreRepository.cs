@@ -68,14 +68,47 @@ namespace StoreApp.Library
         }
         public void AddOrder(Order order)
         {
-            /*
             using var context = new StoredbContext(_contextOptions);
+
+            // get all values to create new order
+            var _LocationID = context.Locations.Where(x => x.Name == order.Location.Name).First().Id;
+            var _CustomerID = context.Customers.Where(x => x.FirstName == order.Customer.FirstName && x.LastName == order.Customer.LastName).First().Id;
+            var _total = order.Items.Sum(x => x.Price * x.Amount);
+            var _date = DateTime.Now;
+
+            // create and add the new order to the database
             var new_order = new DataModel.Order
             {
-                LocationId = 
+                LocationId = _LocationID,
+                CustomerId = _CustomerID,
+                Total = (decimal)_total,
+                Date = _date
             };
-            context.Locations.Add(new_order);
-            context.SaveChanges(); */
+            context.Orders.Add(new_order);
+            context.SaveChanges();
+
+            var OrderID = new_order.Id;
+            foreach (var product in order.Items)
+            {
+                // create a new orderline for each product
+                var productID = context.Products.Where(x => x.Name == product.Name).First().Id;
+                var new_orderline = new DataModel.OrderLine
+                {
+                    OrderId = OrderID,
+                    ProductId = productID,
+                    Quantity = product.Amount,
+                    Discount = (decimal)product.Discount
+                };
+                context.OrderLines.Add(new_orderline);
+
+                // update the inventory lines of the location to reflect the new order
+                var locationline = context.LocationLines
+                    .Include(x => x.Location)
+                    .Where(x => _LocationID == x.Location.Id && productID == x.ProductId).First();
+
+                locationline.Quantity -= product.Amount;
+            }
+            context.SaveChanges();
         }
         public List<Product> GetLocationInventory(Location l)
         {
@@ -221,7 +254,6 @@ namespace StoreApp.Library
                 }
             }
             context.SaveChanges();
-
         }
     }
 }

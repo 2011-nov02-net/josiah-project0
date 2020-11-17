@@ -15,12 +15,16 @@ namespace StoreApp.ConsoleApp
 
             IStoreApp app = new StoreApplication(logger);
 
-            var result = app.ShowLocationInventory(new Location("Target"));
-
-            foreach (var x in result)
-            {
-                Console.WriteLine(x.Name);
-            }
+            app.AddOrder(new Order(
+                new Location("Target"),
+                new Customer("Morty", "Smith"),
+                new List<Product>
+                {
+                    new Product("Lightbulb", 7.00, 3),
+                    new Product("Jerry Can", 25.00, 1),
+                    new Product("flipflam", 33.00, 2)
+                }
+            ));
 
             /*
             var orders = app.ShowOrders();
