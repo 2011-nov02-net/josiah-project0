@@ -50,6 +50,10 @@ namespace StoreApp.Library
         {
             return (!(c1 == c2));
         }
+        public string DisplayProduct()
+        {
+            return $"{Name} | Price: ${Price:N2} | Quantity: {Amount}";
+        }
         public void AddDiscount(double d)
         {
             _discount = d;

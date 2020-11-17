@@ -52,6 +52,10 @@ namespace StoreApp.Library
         /// <param name="order"></param>
         void IStoreApp.AddOrder(Order order)
         {
+            if (order.Items.Count == 0)
+            {
+                throw new ArgumentException("Can't place order for no items");
+            }
             var customers = ShowCustomers();
             var locations = ShowLocations();
 
