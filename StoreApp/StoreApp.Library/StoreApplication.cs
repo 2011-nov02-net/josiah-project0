@@ -49,7 +49,6 @@ namespace StoreApp.Library
         /// performs a few checks against the current data to see if the order is valid,
         /// then passes it to the repository class to insert all necessary records into the database
         /// </summary>
-        /// <param name="order"></param>
         void IStoreApp.AddOrder(Order order)
         {
             if (order.Items.Count == 0)
@@ -87,7 +86,6 @@ namespace StoreApp.Library
         /// the rest of these functions do not perform any logic themselves, but just call
         /// the required function from the repository
         /// </summary>
-        /// <returns></returns>
         public List<Order> ShowOrders()
         {
             return DataRepo.AllOrders();
@@ -145,7 +143,6 @@ namespace StoreApp.Library
         /// old data serialization methods, now obsolete since this class does
         /// not contain all the fields it used to (data is now entirely stored on the database)
         /// </summary>
-        /// <returns></returns>
         /*void IStoreApp.ReadData(string path)
         {
             FileStream fs = new FileStream(path, FileMode.Open);

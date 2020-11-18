@@ -38,7 +38,6 @@ namespace StoreApp.Library
         /// These three functions perform very similarly, they take an object from the Library
         /// and convert it into a single record in the table
         /// </summary>
-        /// <param name="customer"></param>
         public void AddCustomer(Customer customer)
         {
             using var context = new StoredbContext(_contextOptions);
@@ -124,8 +123,6 @@ namespace StoreApp.Library
         /// <summary>
         /// Builds a list of products from a given location by accessing locationlines
         /// </summary>
-        /// <param name="l"></param>
-        /// <returns></returns>
         public List<Product> GetLocationInventory(Location l)
         {
             using var context = new StoredbContext(_contextOptions);
@@ -147,7 +144,6 @@ namespace StoreApp.Library
         /// their respective table and transforming them into business logic classes.
         /// OrdersByCustomer and OrdersByLocation call AllOrders and filter its results
         /// </summary>
-        /// <returns></returns>
         public List<Customer> AllCustomers()
         {
             using var context = new StoredbContext(_contextOptions);
@@ -251,8 +247,6 @@ namespace StoreApp.Library
         /// product record and inserts it into the Product table and continues modifying
         /// inventories.
         /// </summary>
-        /// <param name="location"></param>
-        /// <param name="items"></param>
         public void AddInventoryToLocation(Location location, List<Product> items)
         {
             using var context = new StoredbContext(_contextOptions);
