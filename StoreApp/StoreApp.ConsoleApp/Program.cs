@@ -80,7 +80,7 @@ namespace StoreApp.ConsoleApp
 
                 for (int i = 0; i < customers.Count; i++)
                 {
-                    Console.WriteLine($"{i + 1} {customers[i].FirstName} {customers[i].LastName}");
+                    Console.WriteLine($"({i + 1}) {customers[i].FirstName} {customers[i].LastName}");
                 }
                 try
                 {
@@ -102,7 +102,7 @@ namespace StoreApp.ConsoleApp
 
                 for (int i = 0; i < locations.Count; i++)
                 {
-                    Console.WriteLine($"{i + 1} {locations[i].Name}");
+                    Console.WriteLine($"({i + 1}) {locations[i].Name}");
                 }
                 try
                 {
@@ -157,7 +157,7 @@ namespace StoreApp.ConsoleApp
                     }
                     Icart_input[1] = System.Convert.ToInt32(Scart_input.Split(" ")[1]);
 
-                    if (Icart_input[0] < 1 || Icart_input[0] > locations.Count+1) goto PlaceOrderBuildCart;
+                    if (Icart_input[0] < 1 || Icart_input[0] > inventory.Count+1) goto PlaceOrderBuildCart;
                 }
                 catch (FormatException) {
                     Console.WriteLine("Invalid input");
@@ -281,7 +281,7 @@ namespace StoreApp.ConsoleApp
 
                 for (int i = 0; i < customers.Count; i++)
                 {
-                    Console.WriteLine($"{i + 1} {customers[i].FirstName} {customers[i].LastName}");
+                    Console.WriteLine($"({i + 1}) {customers[i].FirstName} {customers[i].LastName}");
                 }
                 try
                 {
@@ -372,7 +372,7 @@ namespace StoreApp.ConsoleApp
                         goto AddInventoryBuildCart;
                     }
 
-                    if (Icart_input[0] < 1 || Icart_input[0] > locations.Count + 1) goto AddInventoryBuildCart;
+                    if (Icart_input[0] < 1 || Icart_input[0] > products.Count + 1) goto AddInventoryBuildCart;
                 }
                 catch (FormatException)
                 {
@@ -380,8 +380,8 @@ namespace StoreApp.ConsoleApp
                     Console.ReadKey();
                     goto AddInventoryBuildCart;
                 }
-                app.AddInventoryToLocation(location, new List<Product> { new Product(inventory[Icart_input[0] - 1].Name,
-                     inventory[Icart_input[0] - 1].Price, Icart_input[1])});
+                app.AddInventoryToLocation(location, new List<Product> { new Product(products[Icart_input[0] - 1].Name,
+                     products[Icart_input[0] - 1].Price, Icart_input[1])});
                 inventory = app.ShowLocationInventory(location);
             }
         }

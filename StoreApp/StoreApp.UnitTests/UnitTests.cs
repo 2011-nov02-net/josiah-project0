@@ -41,7 +41,7 @@ namespace StoreApp.UnitTests
 
             Assert.True(test.Price == original_price);
         }
-
+        /*
         [Fact]
         public void AddCustomerTest()
         {
@@ -156,6 +156,6 @@ namespace StoreApp.UnitTests
             Order ord2 = new Order(new Location("Japan"), cust, new List<Product> { new Product("Dio", 100, 1) });
 
             Assert.Throws<ArgumentException>(() => app.AddOrder(ord2));
-        }
+        }*/
     }
 }

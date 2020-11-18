@@ -1,0 +1,135 @@
+info: 11/17/2020 18:38:10.487 CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Entity Framework Core 5.0.0 initialized 'StoredbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+info: 11/17/2020 18:38:10.909 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (30ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT [c].[ID], [c].[FirstName], [c].[LastName]
+      FROM [Customer] AS [c]
+info: 11/17/2020 18:38:11.567 CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Entity Framework Core 5.0.0 initialized 'StoredbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+info: 11/17/2020 18:38:11.589 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (18ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT [l].[ID], [l].[Name]
+      FROM [Location] AS [l]
+info: 11/17/2020 18:38:12.793 CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Entity Framework Core 5.0.0 initialized 'StoredbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+info: 11/17/2020 18:38:12.895 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (29ms) [Parameters=[@__l_Name_0='?' (Size = 200)], CommandType='Text', CommandTimeout='30']
+      SELECT [l].[LocationID], [l].[ProductID], [l].[Quantity], [l0].[ID], [l0].[Name], [p].[ID], [p].[Name], [p].[Price]
+      FROM [LocationLines] AS [l]
+      INNER JOIN [Location] AS [l0] ON [l].[LocationID] = [l0].[ID]
+      INNER JOIN [Product] AS [p] ON [l].[ProductID] = [p].[ID]
+      WHERE [l0].[Name] = @__l_Name_0
+info: 11/17/2020 18:38:21.187 CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Entity Framework Core 5.0.0 initialized 'StoredbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+info: 11/17/2020 18:38:21.207 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (19ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT [c].[ID], [c].[FirstName], [c].[LastName]
+      FROM [Customer] AS [c]
+info: 11/17/2020 18:38:21.207 CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Entity Framework Core 5.0.0 initialized 'StoredbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+info: 11/17/2020 18:38:21.225 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (17ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT [l].[ID], [l].[Name]
+      FROM [Location] AS [l]
+info: 11/17/2020 18:38:21.225 CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Entity Framework Core 5.0.0 initialized 'StoredbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+info: 11/17/2020 18:38:21.245 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (18ms) [Parameters=[@__l_Name_0='?' (Size = 200)], CommandType='Text', CommandTimeout='30']
+      SELECT [l].[LocationID], [l].[ProductID], [l].[Quantity], [l0].[ID], [l0].[Name], [p].[ID], [p].[Name], [p].[Price]
+      FROM [LocationLines] AS [l]
+      INNER JOIN [Location] AS [l0] ON [l].[LocationID] = [l0].[ID]
+      INNER JOIN [Product] AS [p] ON [l].[ProductID] = [p].[ID]
+      WHERE [l0].[Name] = @__l_Name_0
+info: 11/17/2020 18:38:21.247 CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Entity Framework Core 5.0.0 initialized 'StoredbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+info: 11/17/2020 18:38:21.270 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (19ms) [Parameters=[@__order_Location_Name_0='?' (Size = 200)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(1) [l].[ID], [l].[Name]
+      FROM [Location] AS [l]
+      WHERE [l].[Name] = @__order_Location_Name_0
+info: 11/17/2020 18:38:21.290 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (18ms) [Parameters=[@__order_Customer_FirstName_0='?' (Size = 100), @__order_Customer_LastName_1='?' (Size = 100)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(1) [c].[ID], [c].[FirstName], [c].[LastName]
+      FROM [Customer] AS [c]
+      WHERE ([c].[FirstName] = @__order_Customer_FirstName_0) AND ([c].[LastName] = @__order_Customer_LastName_1)
+info: 11/17/2020 18:38:21.406 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (21ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = DateTime), @p2='?' (DbType = Int32), @p3='?' (DbType = Decimal)], CommandType='Text', CommandTimeout='30']
+      SET NOCOUNT ON;
+      INSERT INTO [Order] ([CustomerID], [Date], [LocationID], [Total])
+      VALUES (@p0, @p1, @p2, @p3);
+      SELECT [ID]
+      FROM [Order]
+      WHERE @@ROWCOUNT = 1 AND [ID] = scope_identity();
+info: 11/17/2020 18:38:21.489 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (19ms) [Parameters=[@__8__locals2_product_Name_0='?' (Size = 200)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(1) [p].[ID], [p].[Name], [p].[Price]
+      FROM [Product] AS [p]
+      WHERE [p].[Name] = @__8__locals2_product_Name_0
+info: 11/17/2020 18:38:21.530 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (31ms) [Parameters=[@__8__locals1__LocationID_0='?' (DbType = Int32), @__productID_1='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(1) [l].[LocationID], [l].[ProductID], [l].[Quantity], [l0].[ID], [l0].[Name]
+      FROM [LocationLines] AS [l]
+      INNER JOIN [Location] AS [l0] ON [l].[LocationID] = [l0].[ID]
+      WHERE (@__8__locals1__LocationID_0 = [l0].[ID]) AND (@__productID_1 = [l].[ProductID])
+info: 11/17/2020 18:38:21.576 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (20ms) [Parameters=[@p1='?' (DbType = Int32), @p2='?' (DbType = Int32), @p0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SET NOCOUNT ON;
+      UPDATE [LocationLines] SET [Quantity] = @p0
+      WHERE [LocationID] = @p1 AND [ProductID] = @p2;
+      SELECT @@ROWCOUNT;
+info: 11/17/2020 18:38:21.593 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (17ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = Int32), @p2='?' (Precision = 18) (DbType = Decimal), @p3='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SET NOCOUNT ON;
+      INSERT INTO [OrderLines] ([OrderID], [ProductID], [Discount], [Quantity])
+      VALUES (@p0, @p1, @p2, @p3);
+info: 11/17/2020 18:38:24.965 CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Entity Framework Core 5.0.0 initialized 'StoredbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+info: 11/17/2020 18:38:24.983 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (18ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT [c].[ID], [c].[FirstName], [c].[LastName]
+      FROM [Customer] AS [c]
+info: 11/17/2020 18:38:25.980 CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Entity Framework Core 5.0.0 initialized 'StoredbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+info: 11/17/2020 18:38:26.001 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (18ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT [o].[ID], [o].[CustomerID], [o].[Date], [o].[LocationID], [o].[Total]
+      FROM [Order] AS [o]
+info: 11/17/2020 18:38:26.030 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (18ms) [Parameters=[@__ord_Id_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT [o].[OrderID], [o].[ProductID], [o].[Discount], [o].[Quantity], [p].[ID], [p].[Name], [p].[Price], [o0].[ID], [o0].[CustomerID], [o0].[Date], [o0].[LocationID], [o0].[Total], [c].[ID], [c].[FirstName], [c].[LastName], [l].[ID], [l].[Name]
+      FROM [OrderLines] AS [o]
+      INNER JOIN [Product] AS [p] ON [o].[ProductID] = [p].[ID]
+      INNER JOIN [Order] AS [o0] ON [o].[OrderID] = [o0].[ID]
+      INNER JOIN [Customer] AS [c] ON [o0].[CustomerID] = [c].[ID]
+      INNER JOIN [Location] AS [l] ON [o0].[LocationID] = [l].[ID]
+      WHERE [o].[OrderID] = @__ord_Id_0
+info: 11/17/2020 18:38:26.049 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (17ms) [Parameters=[@__ord_Id_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT [o].[OrderID], [o].[ProductID], [o].[Discount], [o].[Quantity], [p].[ID], [p].[Name], [p].[Price], [o0].[ID], [o0].[CustomerID], [o0].[Date], [o0].[LocationID], [o0].[Total], [c].[ID], [c].[FirstName], [c].[LastName], [l].[ID], [l].[Name]
+      FROM [OrderLines] AS [o]
+      INNER JOIN [Product] AS [p] ON [o].[ProductID] = [p].[ID]
+      INNER JOIN [Order] AS [o0] ON [o].[OrderID] = [o0].[ID]
+      INNER JOIN [Customer] AS [c] ON [o0].[CustomerID] = [c].[ID]
+      INNER JOIN [Location] AS [l] ON [o0].[LocationID] = [l].[ID]
+      WHERE [o].[OrderID] = @__ord_Id_0
+info: 11/17/2020 18:38:26.067 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (17ms) [Parameters=[@__ord_Id_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT [o].[OrderID], [o].[ProductID], [o].[Discount], [o].[Quantity], [p].[ID], [p].[Name], [p].[Price], [o0].[ID], [o0].[CustomerID], [o0].[Date], [o0].[LocationID], [o0].[Total], [c].[ID], [c].[FirstName], [c].[LastName], [l].[ID], [l].[Name]
+      FROM [OrderLines] AS [o]
+      INNER JOIN [Product] AS [p] ON [o].[ProductID] = [p].[ID]
+      INNER JOIN [Order] AS [o0] ON [o].[OrderID] = [o0].[ID]
+      INNER JOIN [Customer] AS [c] ON [o0].[CustomerID] = [c].[ID]
+      INNER JOIN [Location] AS [l] ON [o0].[LocationID] = [l].[ID]
+      WHERE [o].[OrderID] = @__ord_Id_0
+info: 11/17/2020 18:38:26.084 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (17ms) [Parameters=[@__ord_Id_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT [o].[OrderID], [o].[ProductID], [o].[Discount], [o].[Quantity], [p].[ID], [p].[Name], [p].[Price], [o0].[ID], [o0].[CustomerID], [o0].[Date], [o0].[LocationID], [o0].[Total], [c].[ID], [c].[FirstName], [c].[LastName], [l].[ID], [l].[Name]
+      FROM [OrderLines] AS [o]
+      INNER JOIN [Product] AS [p] ON [o].[ProductID] = [p].[ID]
+      INNER JOIN [Order] AS [o0] ON [o].[OrderID] = [o0].[ID]
+      INNER JOIN [Customer] AS [c] ON [o0].[CustomerID] = [c].[ID]
+      INNER JOIN [Location] AS [l] ON [o0].[LocationID] = [l].[ID]
+      WHERE [o].[OrderID] = @__ord_Id_0
+info: 11/17/2020 18:38:26.102 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (17ms) [Parameters=[@__ord_Id_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT [o].[OrderID], [o].[ProductID], [o].[Discount], [o].[Quantity], [p].[ID], [p].[Name], [p].[Price], [o0].[ID], [o0].[CustomerID], [o
