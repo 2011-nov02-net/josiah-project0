@@ -16,7 +16,7 @@ namespace StoreApp.ConsoleApp
 
             int input = 0;
 
-            while (input != 8)
+            while (input != 9)
             {
             Menu:
                 Console.Clear();
@@ -27,11 +27,12 @@ namespace StoreApp.ConsoleApp
                                   "(5) Display orders by location\n" +
                                   "(6) Display all orders\n" +
                                   "(7) Add inventory to location\n" +
-                                  "(8) Quit");
+                                  "(8) Add new product\n" +
+                                  "(9) Quit");
                 try
                 {
                     input = System.Convert.ToInt32(Console.ReadLine());
-                    if (input < 1 || input > 8) goto Menu;
+                    if (input < 1 || input > 9) goto Menu;
                 }
                 catch (FormatException) { goto Menu; }
 
@@ -60,106 +61,12 @@ namespace StoreApp.ConsoleApp
                     case 7:
                         AddInventoryToLocation(app);
                         break;
+                    case 8:
+                        AddProduct(app);
+                        break;
                 }
             }
-
-            /*
-            app.AddOrder(new Order(
-                new Location("Target"),
-                new Customer("Morty", "Smith"),
-                new List<Product>
-                {
-                    new Product("Lightbulb", 7.00, 3),
-                    new Product("Jerry Can", 25.00, 1),
-                    new Product("flipflam", 33.00, 2)
-                }
-            ));
-
-            /*
-            var orders = app.ShowOrders();
-
-            var orders = app.ShowOrdersByCustomer(new Customer("Jerry", "Smith", 1));
-            var orders = app.ShowOrdersByCustomer(new Customer("Morty", "Smith", 1));
-
-            var orders = app.ShowOrdersByLocation(new Location("Walmart"));
-            var orders = app.ShowOrdersByLocation(new Location("Target"));
-
-            var walmart = new Location("Target");
-            var newItems = new List<Product>();
-
-            newItems.Add(new Product("Jerry Can", 25.00, 3));
-
-            app.AddInventoryToLocation(walmart, newItems);
-
-            /*
-            string filepath = @"../../../../Data/AppData.xml";
-
-            IStoreApp app = new StoreApplication();
-
-            int write_flag = 0;
-
-            if (write_flag == 1)
-            {
-                app.AddCustomer(new Customer("Jeff", "Winger"));
-                app.AddCustomer(new Customer("Britta", "Perry"));
-                app.AddCustomer(new Customer("Abed", "Nadir"));
-                app.AddCustomer(new Customer("Troy", "Barnes"));
-                app.AddCustomer(new Customer("Shirley", "Bennett"));
-                app.AddCustomer(new Customer("Annie", "Edison"));
-                app.AddCustomer(new Customer("Pierce", "Hawthorne"));
-                app.AddCustomer(new Customer("Jerry", "Smith"));
-
-                app.AddLocation(new Location("West Street"));
-                app.AddLocation(new Location("Doppler Emporium"));
-
-                app.AddInventoryToLocation(new Location("West Street"),
-                    new List<Product> { new Product("lollipop", 1.00, 300),
-                                    new Product("cupcake", 3.00, 20),
-                                    new Product("muffin", 5.00, 30)
-                    });
-            }
-            else
-            {
-                app.ReadData(filepath);
-            }
-
-            try
-            {
-                app.AddOrder(new Order(
-                    new Location("West Street"),
-                    new Customer("Jerry", "Smith"),
-                    new List<Product>
-                    {
-                        new Product("lollipop", 1.00, 50),
-                        new Product("cupcake", 3.00, 3),
-                        new Product("muffin", 5.00, 1)
-                    }
-                    ));
-                
-            }
-            catch (ArgumentException e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            
-
-            var test = app.SearchOrdersByCustomer(new Customer("Jerry", "Smith"));
-
-            //var test = app.SearchOrdersByLocation(new Location("West Street"));
-
-
-            foreach (var x in test)
-            {
-                Console.WriteLine(x.DisplayOrder());
-            }
-
-            if (write_flag == 1)
-            {
-                app.WriteData(filepath);
-            } */
-
         }
-
         static void PlaceOrder(IStoreApp app)
         {
             var customers = app.ShowCustomers();
@@ -289,7 +196,6 @@ namespace StoreApp.ConsoleApp
             }
             Console.WriteLine("Order placed successfully");
             Console.ReadKey();
-
         }
         static void AddNewCustomer(IStoreApp app)
         {
@@ -402,11 +308,110 @@ namespace StoreApp.ConsoleApp
         }
         static void AddInventoryToLocation(IStoreApp app)
         {
+            var products = app.ShowProducts();
+            var locations = app.ShowLocations();
+            int input = 0;
 
+            while (input < 1 || input > locations.Count)
+            {
+            AddInventoryChooseLocation:
+                Console.Clear();
+                Console.WriteLine("Enter the number of the location");
+
+                for (int i = 0; i < locations.Count; i++)
+                {
+                    Console.WriteLine($"{i + 1} {locations[i].Name}");
+                }
+                try
+                {
+                    input = System.Convert.ToInt32(Console.ReadLine());
+                    if (input < 1 || input > locations.Count) goto AddInventoryChooseLocation;
+                }
+                catch (FormatException) { goto AddInventoryChooseLocation; }
+            }
+            var location = locations[input - 1];
+
+            var inventory = app.ShowLocationInventory(location);
+
+            string Scart_input = "";
+            int[] Icart_input = { 0, 0 };
+
+            while (Icart_input[0] != inventory.Count + 1)
+            {
+            AddInventoryBuildCart:
+                Console.Clear();
+                Console.WriteLine("Available Products:");
+                for (int i = 0; i < products.Count; i++)
+                {
+                    Console.WriteLine($"({i+1}) {products[i].Name} ${products[i].Price:N2}");
+                }
+                Console.WriteLine($"({products.Count + 1}) to finish\n");
+                Console.WriteLine($"{location.Name} inventory");
+                for (int i = 0; i < inventory.Count; i++)
+                {
+                    Console.WriteLine($"{inventory[i].DisplayProduct()}");
+                }
+                Console.WriteLine("Enter the product number and quantity desired:");
+                try
+                {
+                    Scart_input = Console.ReadLine();
+                    Icart_input[0] = System.Convert.ToInt32(Scart_input.Split(" ")[0]);
+                    if (Icart_input[0] == products.Count + 1) break;
+
+                    if (Scart_input.Split(" ").Length != 2)
+                    {
+                        Console.WriteLine("Invalid input");
+                        Console.ReadKey();
+                        goto AddInventoryBuildCart;
+                    }
+                    Icart_input[1] = System.Convert.ToInt32(Scart_input.Split(" ")[1]);
+                    if (Icart_input[1] < 1)
+                    {
+                        Console.WriteLine("Invalid amount of items to add");
+                        Console.ReadKey();
+                        goto AddInventoryBuildCart;
+                    }
+
+                    if (Icart_input[0] < 1 || Icart_input[0] > locations.Count + 1) goto AddInventoryBuildCart;
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Invalid input");
+                    Console.ReadKey();
+                    goto AddInventoryBuildCart;
+                }
+                app.AddInventoryToLocation(location, new List<Product> { new Product(inventory[Icart_input[0] - 1].Name,
+                     inventory[Icart_input[0] - 1].Price, Icart_input[1])});
+                inventory = app.ShowLocationInventory(location);
+            }
         }
-        static void DisplayLocationInventory(IStoreApp app)
+        static void AddProduct(IStoreApp app)
         {
+            string name, input;
+            double price;
 
+        AddProductInput:
+            Console.Clear();
+            Console.WriteLine("Enter the name and price of the new product:");
+            input = Console.ReadLine();
+            try
+            {
+                if (input.Split(" ").Length != 2)
+                {
+                    throw new FormatException();
+                }
+                name = input.Split(" ")[0];
+                price = System.Convert.ToDouble(input.Split(" ")[1]);
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Invalid input");
+                Console.ReadKey();
+                goto AddProductInput;
+            }
+            app.AddProduct(new Product(name, price, 1));
+            Console.WriteLine($"new product {name} for ${price:N2} added");
+            Console.ReadKey();
         }
     }
 }

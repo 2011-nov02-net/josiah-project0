@@ -39,4 +39,3 @@ insert into OrderLines values (1, 1, 1, 1.0)
 insert into OrderLines values (1, 2, 3, 1.0)
 
 insert into OrderLines values(2, 1, 10, 1.0)
-
