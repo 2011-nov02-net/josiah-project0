@@ -8,6 +8,7 @@ namespace StoreApp.ConsoleApp
 {
     class Program
     {
+        
         static void Main(string[] args)
         {
             StreamWriter logger = new StreamWriter("../../../../ef-log.txt");
@@ -16,6 +17,7 @@ namespace StoreApp.ConsoleApp
 
             int input = 0;
 
+            // main menu
             while (input != 9)
             {
             Menu:
@@ -210,6 +212,8 @@ namespace StoreApp.ConsoleApp
             }
             app.AddCustomer(new Customer(fullname[0], fullname[1]));
         }
+
+        // diaplay methods that can be refactored
         static void DisplayCustomers(IStoreApp app)
         {
             var customers = app.ShowCustomers();
@@ -306,6 +310,8 @@ namespace StoreApp.ConsoleApp
                 }
             }
         }
+
+        // business logic that can be refactored into domain classes
         static void AddInventoryToLocation(IStoreApp app)
         {
             var products = app.ShowProducts();
