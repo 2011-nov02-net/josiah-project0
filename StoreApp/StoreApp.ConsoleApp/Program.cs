@@ -10,6 +10,7 @@ namespace StoreApp.ConsoleApp
     {
         static void Main(string[] args)
         {
+            // this is a logger. It logs
             StreamWriter logger = new StreamWriter("../../../../ef-log.txt");
 
             IStoreApp app = new StoreApplication(logger);
@@ -32,8 +33,10 @@ namespace StoreApp.ConsoleApp
                 try
                 {
                     input = System.Convert.ToInt32(Console.ReadLine());
+                    // Yes, I used a goto statement, fight me.
                     if (input < 1 || input > 9) goto Menu;
                 }
+                // oh no, another one
                 catch (FormatException) { goto Menu; }
 
                 Console.Clear();
